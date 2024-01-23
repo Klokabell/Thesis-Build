@@ -1,0 +1,35 @@
+html {
+  font-size: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: center;
+}
+
+body {
+  padding: 3vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 1.5rem;
+  white-space: nowrap;
+
+}
+.header_logo {
+  flex-grow: 1;
+ }
+.header_text {
+  flex-grow: 2;
+}
+.header_nav{
+  flex-grow: 1;
+}
