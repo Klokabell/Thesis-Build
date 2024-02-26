@@ -1,0 +1,27 @@
+@import "../abstracts/variables.scss";
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: $default-font-size;
+  line-height: 1.7;
+  color: #777;
+  box-sizing: border-box;
+}
+
+.heading-primary {
+  color: $color-white;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: .6rem;
+  word-spacing: 1.5rem;
+  line-height: 6rem;
+}
+
+
+.heading-primary > span {
+  display: block; 
+  font-size: 4rem;
+}

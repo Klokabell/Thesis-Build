@@ -1,0 +1,28 @@
+.stocks {
+  margin: 0 auto;
+
+  display: flex;
+  width: 50%;
+  flex-wrap: wrap;
+
+  .stock {
+    &__container:first-of-type {
+      margin-top: 5rem;
+    }
+
+    &__container {
+      display: flex;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+    }
+
+    &__name {
+      min-width: 40%;
+    }
+
+    &__symbol &__sector {
+        min-width: 25%;
+    }
+  }
+}

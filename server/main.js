@@ -1,30 +1,21 @@
 import express from "express";
-import fs from "fs"
 import cors from "cors";
+import mongoFind from "./utilities/mongoQueries.js";
+import { connectDB } from "./utilities/connectDB.js"
 
-const app = express();
 const PORT = 3005;
+const app = express();
+app.use(cors())
 
-const data = fs.readFileSync('server/data/sampleData.cjs');
-const jsonData = JSON.parse(data)
-
-app.use(cors());
-
-app.get("/api/sampleData", async (req, res) => {
+const main = async () => {
   try {
-    res.json(jsonData);
+    connectDB().then(mongoFind)
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
   } catch (error) {
-    console.error("Error finding or reading the data", error);
-    res.status(500).json({ error: "Server Side Error" });
+    console.error("Error connecting to the database:", error);
   }
-});
+};
 
-app.listen(PORT, () => {
-    if(Object.keys(jsonData).length > 0){
-        console.log(`Data found, server running on http://localhost:${PORT}`);
-    }
-    else {
-        console.log("No data found, retrying")
-        setTimeout(()=> console.log(jsonData), 3000)
-    }
-});
+main()

@@ -1,0 +1,38 @@
+@import "./abstracts/variables.scss";
+@import "./base/typography";
+@import "./base/utilities";
+@import "./components/chart-element";
+@import "./components/navbar";
+@import "./layout/header";
+@import "./layout/grid";
+@import "./components/Overview";
+@import "./components/searchbar";
+
+html {
+  font-size: 62.5%;
+  height: 1080px;
+  width: 100vw;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+
+}
+
+
+
+.App {
+  height: 100%;
+  max-width: 100%;
+  background-color: #F8F8FF;
+}
+
+
+.header {
+  background-color: #6842b8;
+}

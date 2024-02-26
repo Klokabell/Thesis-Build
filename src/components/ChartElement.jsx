@@ -1,35 +1,22 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import ApexChart from "apexcharts";
+import fetchData from "../utilities/dataFetch";
 // eslint-disable-next-line no-unused-vars
 import dayjs from "dayjs";
 
 const ChartElement = () => {
   const [chartData, setChartData] = useState([]);
+  const dataURL = "http://localhost:3005/api/sampleData"
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3005/api/sampleData");
-
-        if (!response.ok) {
-          throw new Error(`HTTP ERROR: Status: ${response.status}`);
-        }
-
-        const resData = await response.json();
-        setChartData(resData);
-      } catch (error) {
-        console.error("Error fetching the data - ", error);
-      }
-    };
-
-    fetchData();
+  
+    fetchData(dataURL).then(res => setChartData(res));
   }, []);
 
   const options = {
     tooltip: {
-        enabled: false
+      enabled: true,
     },
     series: [
       {
@@ -38,11 +25,14 @@ const ChartElement = () => {
       },
     ],
     chart: {
-      height: 350,
-      type: "candlestick",
-      toolbar: {
-        show: false,
+      dropShadow: {
+        enabled: true,
+        top: 2,
+        left: 5,
+        blur: 3,
+        opacity: 0.2,
       },
+      type: "candlestick",
     },
     xaxis: {
       type: "category",
@@ -50,27 +40,27 @@ const ChartElement = () => {
         formatter: function (val) {
           return dayjs(val).format("DD/MM/YY H:mm");
         },
-      },
-      annotations: {
-        xaxis: [
-          {
-            x: 'Oct 06',
-            borderColor: '#00E396',
-            label: {
-              borderColor: '#00E396',
-              orientation: 'horizontal',
-              text: 'X Annotation'
-            }
-          }
-        ]
+        style: {
+          colors: "#D0CFEC",
+        },
       },
       tooltip: {
-        enabled: false,
-      },
+        offsetX: -100
+      }
     },
     yaxis: {
-      tooltip: {
-        enabled: false,
+      labels: {
+        style: {
+          colors: "#D0CFEC",
+        },
+      },
+    },
+    plotOptions: {
+      candlestick: {
+        colors: {
+          upward: "#5AA329",
+          downward: "#D91C48",
+        },
       },
     },
   };

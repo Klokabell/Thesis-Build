@@ -1,0 +1,15 @@
+.chartBox {
+  grid-row: 3 / 4;
+  grid-column: 5 / 9;
+  background-color: $color-tertiary-light;
+  border-radius: 10px;
+  padding: 2rem 4rem 1rem 1rem;
+  background: linear-gradient(225deg, #dfdfe6, #ffffff);
+  box-shadow:  10px 10px 25px #bfbfc4,
+              -10px -10px 25px #ffffff;
+}
+
+.apexcharts-tooltip {
+  background: #f3f3f3;
+  color: black;
+}

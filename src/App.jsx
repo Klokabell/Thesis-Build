@@ -1,18 +1,18 @@
-import "./App.css";
-import ChartElement from "./components/ChartElement";
+import { Home } from "./pages/Home";
+import { Market } from "./pages/Market"
+import "./style/main.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <div className="header">
-        <img className="header_logo"></img>
-        <h1 className="header_text">Small Cap Trading Simulator</h1>
-        <div className="header_nav"></div>
-      </div>
-      <div className="chartContainer">
-        <ChartElement />
-      </div>
-    </>
+    <div className="App">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/market" element={<Market />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

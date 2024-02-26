@@ -1,0 +1,134 @@
+/* .navbar {
+  grid-column: 11 / 13;  
+
+  padding-top: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .login {
+    margin-bottom: 4rem;
+    align-self: center;
+
+    .username,
+    .password {
+      width: 10rem;
+      border-radius: 1rem;
+      margin: 2.5px 1rem;
+      border: none;
+      background-color: rgba($color-primary-fade, 0.4);
+      padding-left: 1rem;
+
+      &::placeholder {
+        color: $color-white;
+        font-weight: 600;
+      }
+    }
+  }
+  .icons {
+    width: 100%;
+    align-self: center;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    .icontainer {
+
+      img {
+        width: 3rem;
+      }
+
+      .btn {          
+          border: none;
+          border-radius: 8px;
+          background-color: rgba($color-primary-fade, $alpha: 0);
+      }
+    }
+
+    .portfolio, .market, .leaderboard {
+      justify-self: center;
+    }
+
+    .portfolio{
+      grid-column: 1 / 2;
+    }
+    .market {
+      grid-column: 2 / 3;
+    }
+    .leaderboard {
+      grid-column: 3 / 4;
+    }
+  }
+}
+ */
+
+/*
+.navbar {
+  //background-color: $color-primary-fade;
+  //background-color: $color-primary-base;
+  //background-color: $color-primary-base;
+
+  grid-column: 11 / 13;  
+
+  padding-top: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .login {
+    margin-bottom: 4rem;
+    align-self: center;
+
+    .username,
+    .password {
+      width: 10rem;
+      border-radius: 1rem;
+      margin: 2.5px 1rem;
+      border: none;
+      background-color: rgba($color-primary-fade, 0.4);
+      padding-left: 1rem;
+
+      &::placeholder {
+        color: $color-white;
+        font-weight: 600;
+      }
+    }
+  }
+  .icons {
+    width: 100%;
+    align-self: center;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    .icontainer {
+
+      img {
+        width: 3rem;
+      }
+
+      .btn {          
+          border: none;
+          border-radius: 8px;
+          background-color: rgba($color-primary-fade, $alpha: 0);
+      }
+    }
+
+    .portfolio, .market, .leaderboard {
+      justify-self: center;
+    }
+
+    .portfolio{
+      grid-column: 1 / 2;
+    }
+    .market {
+      grid-column: 2 / 3;
+    }
+    .leaderboard {
+      grid-column: 3 / 4;
+    }
+  }
+}
+*/
