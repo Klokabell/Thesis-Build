@@ -81,9 +81,12 @@ body {
   margin-top: 10rem !important;
 }
 
+.chart-container {
+  grid-row: 2/4;
+  grid-column: 4/11;
+}
+
 .chartBox {
-  grid-row: 3/4;
-  grid-column: 5/9;
   background-color: #4578C6;
   border-radius: 10px;
   padding: 2rem 4rem 1rem 1rem;
@@ -393,26 +396,92 @@ $color-chart-red: #D91C48;
   grid-area: spent;
 }
 
-.stocks {
-  margin: 0 auto;
-  display: flex;
-  width: 50%;
-  flex-wrap: wrap;
+.searchbar_container {
+  align-self: flex-end;
+  position: relative;
 }
-.stocks .stock__container:first-of-type {
-  margin-top: 5rem;
+.searchbar_input {
+  border-bottom: none;
+  padding-bottom: 0.5rem;
+  background-color: rgba(194, 180, 224, 0.829);
 }
-.stocks .stock__container {
-  display: flex;
+.searchbar_suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
   width: 100%;
-  box-sizing: border-box;
-  justify-content: space-between;
+  z-index: 1;
 }
-.stocks .stock__name {
-  min-width: 40%;
+
+.summary {
+  display: grid;
+  background-color: #1F3B65;
+  height: 100%;
+  text-align: left;
+  font-size: 1.1rem;
+  color: #EAE9E9;
+  border-radius: 0 0 2rem 2rem;
+  -moz-column-gap: 3rem;
+       column-gap: 3rem;
+  box-shadow: 1px 3px 10px #261F65;
+  max-width: 20%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  padding-bottom: 1rem;
+  grid-template-areas: "head head" "total change" "cash spent";
+  grid-template-rows: min-content;
+  grid-template-columns: repeat(2, minmax(10rem, 1fr));
 }
-.stocks .stock__symbol .stocks .stock__sector {
-  min-width: 25%;
+.summary > h2 {
+  grid-area: head;
+  background-color: #1F3B65;
+  text-align: center;
+  margin: 0;
+  font-size: 2rem;
+  padding: 3px;
+  border-radius: 2rem;
+  letter-spacing: 1.2px;
+  margin-bottom: 1rem;
+}
+.summary .container {
+  padding: 0 0 0 1rem;
+}
+.summary__span {
+  font-size: 1.3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1.2;
+}
+.summary .total {
+  grid-area: total;
+  padding-top: 1rem;
+}
+.summary .period-change {
+  grid-area: change;
+  display: flex;
+  flex-direction: column;
+}
+.summary .period-change .change-span {
+  font-weight: 500;
+}
+.summary .period-change .dollar {
+  text-align: start;
+}
+.summary .period-change .percent {
+  text-align: start;
+}
+.summary .cash {
+  grid-area: cash;
+}
+.summary .spent {
+  grid-area: spent;
+}
+.summary_hidden {
+  visibility: hidden;
+}
+
+.times-btns {
+  display: flex;
 }
 
 html {

@@ -1,29 +1,24 @@
+/* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import React, { useState, useEffect } from "react";
+import { useSignalEffect, useSignals } from "@preact/signals-react/runtime";
 import Chart from "react-apexcharts";
-import fetchData from "../utilities/dataFetch";
-// eslint-disable-next-line no-unused-vars
 import dayjs from "dayjs";
+import { selectedStock, selectedHistory, chartArray, sliceValue } from "../utilities/DataProvider";
 
 const ChartElement = () => {
-  const [chartData, setChartData] = useState([]);
-  const dataURL = "http://localhost:3005/api/sampleData"
+  useSignals();
 
-  useEffect(() => {
-  
-    fetchData(dataURL).then(res => setChartData(res));
-  }, []);
+  const chartValues = (stocksArray) => {
+    return stocksArray.map((item) => ({
+      x: new Date(item.Date),
+      y: [item.Open, item.High, item.Low, item.Close],
+    }));
+  };
 
   const options = {
     tooltip: {
       enabled: true,
     },
-    series: [
-      {
-        name: "candle",
-        data: chartData,
-      },
-    ],
     chart: {
       dropShadow: {
         enabled: true,
@@ -45,8 +40,8 @@ const ChartElement = () => {
         },
       },
       tooltip: {
-        offsetX: -100
-      }
+        offsetX: -100,
+      },
     },
     yaxis: {
       labels: {
@@ -55,6 +50,7 @@ const ChartElement = () => {
         },
       },
     },
+    title: { text: selectedStock.value},
     plotOptions: {
       candlestick: {
         colors: {
@@ -65,13 +61,25 @@ const ChartElement = () => {
     },
   };
 
+  
+  const series = [{ data: chartArray.value}]
+
+
+  useSignalEffect(() => {
+    chartArray.value = chartValues(selectedHistory.value.slice(0, sliceValue.value));
+    console.log("selectedHistory.value", selectedHistory.value)
+  });
+
+  if (!selectedStock) return <div>Loading...</div>;
+
+
+
+
   return (
     <div className="chartBox" id="apex">
-      {chartData.length > 0 ? (
-        <Chart options={options} series={options.series} type="candlestick" />
-      ) : (
-        <p>Loading...</p>
-      )}
+      <div>
+        <Chart options={options} series={series} type="candlestick" />
+      </div>
     </div>
   );
 };

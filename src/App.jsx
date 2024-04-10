@@ -1,19 +1,17 @@
-import { Home } from "./pages/Home";
-import { Market } from "./pages/Market"
-import "./style/main.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
+import { useSignals } from "@preact/signals-react/runtime";
+import { router } from "./Routing/router.jsx";
 
-function App() {
+
+const App = () => {
+  useSignals();
+
+
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/market" element={<Market />} />
-        </Routes>
-      </Router>
+    <div>
+      <RouterProvider router={router} />
     </div>
-  );
-}
+  )
+};
 
 export default App;

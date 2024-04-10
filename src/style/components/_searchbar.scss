@@ -1,28 +1,20 @@
-.stocks {
-  margin: 0 auto;
+.searchbar {
+  &_container {
+    align-self: flex-end;
+    position: relative;
+  }
 
-  display: flex;
-  width: 50%;
-  flex-wrap: wrap;
+  &_input {
+    border-bottom: none;
+    padding-bottom: 0.5rem;
+    background-color: rgba(194, 180, 224, 0.829);
+  }
 
-  .stock {
-    &__container:first-of-type {
-      margin-top: 5rem;
-    }
-
-    &__container {
-      display: flex;
-      width: 100%;
-      box-sizing: border-box;
-      justify-content: space-between;
-    }
-
-    &__name {
-      min-width: 40%;
-    }
-
-    &__symbol &__sector {
-        min-width: 25%;
-    }
+  &_suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0; 
+    width: 100%;
+    z-index: 1;
   }
 }

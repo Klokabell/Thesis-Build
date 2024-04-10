@@ -1,6 +1,9 @@
+.chart-container{
+  grid-row: 2 / 4;
+  grid-column: 4 / 11;
+}
+
 .chartBox {
-  grid-row: 3 / 4;
-  grid-column: 5 / 9;
   background-color: $color-tertiary-light;
   border-radius: 10px;
   padding: 2rem 4rem 1rem 1rem;

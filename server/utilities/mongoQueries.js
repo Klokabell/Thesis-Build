@@ -1,36 +1,33 @@
-import { client } from "./connectDB.js"
+import mongoConnect from "./mongoConnect";
+const client = await mongoConnect();
 
-const collections = ["AAPL - apple", "MSFT - microsoft", "NVDA-nvidia"]
-const newColl = "selected_data"
+const mongoFind = async () => {
+  const dbase = client.db("Mock-Stocks");
+  const checkNvidia = dbase.collection("NVDA-nvidia");
 
-const mongoFind = async(date) => {
-    try {
-  
-      const db = client.db("Mock-Stocks")
-     
-      collections.forEach(coll => {
-        const company = db.collection(coll)
-        company.find({ Date: date}).toArray((err, doc) => {
-            if(err) {
-                console.error("Trouble querying collections: ", err)
-                return
-            }
-
-            const datedCollection = db.collection(coll)
-            datedCollection.insertMany(docs, (err, result) => {
-                if(err)
-            })
-        })
-      })
-      if(document){ 
-        console.log("document found", document)
-    }
-
-      else console.log("No document found")
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
-    }
+  try {
+    let sample = await checkNvidia.findOne();
+    console.log(sample.High);
+  } catch (err) {
+    console.error("AH NO, error! ", err);
   }
+};
 
-  export default mongoFind
+const retrieveWeek = async (currentWeek) => {
+  const collection = await client.db("Mock-stocks").collection("2016_Below_10");
+
+  if (currentWeek == 52) return "year complete";
+  else
+    try {
+      currentWeek++;
+      const nextWeek = await collection.find({
+        Date: currentWeek,
+      });
+      return nextWeek;
+    } catch (err) {
+      return;
+    }
+};
+
+
+export { mongoFind, retrieveWeek };

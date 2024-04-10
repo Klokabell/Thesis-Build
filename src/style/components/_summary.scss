@@ -1,0 +1,86 @@
+.summary {
+  display: grid;
+  background-color: $color-tertiary-base;
+  height: 100%;
+  text-align: left;
+  font-size: 1.1rem;
+  color: $color-white;
+  border-radius: 0 0 2rem 2rem;
+  column-gap: 3rem;
+  box-shadow: 1px 3px 10px $color-primary-base;
+  max-width: 20%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  padding-bottom: 1rem;
+
+  grid-template-areas:
+    "head head"
+    "total change"
+    "cash spent";
+  grid-template-rows: min-content;
+  grid-template-columns: repeat(2, minmax(10rem, 1fr));
+
+  & > h2 {
+    grid-area: head;
+    background-color: $color-tertiary-base;
+    text-align: center;
+    margin: 0;
+    font-size: 2rem;
+    padding: 3px;
+    border-radius: 2rem;
+    letter-spacing: 1.2px;
+    margin-bottom: 1rem;
+  }
+
+  .container {
+    padding: 0 0 0 1rem;
+  }
+
+  .total,
+  .change {
+  }
+
+  &__span {
+    font-size: 1.3rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1.2;
+  }
+
+  .total {
+    grid-area: total;
+    padding-top: 1rem;
+  }
+
+  .period-change {
+    grid-area: change;
+    display: flex;
+    flex-direction: column;
+
+    .change-span {
+      font-weight: 500;
+    }
+
+    .dollar {
+      text-align: start;
+    }
+    .percent {
+      text-align: start;
+    }
+  }
+
+  .cash {
+    grid-area: cash;
+  }
+
+  .spent {
+    grid-area: spent;
+  }
+  
+  &_hidden{
+    visibility: hidden;
+  }
+}
+
+#company_summary {
+}
