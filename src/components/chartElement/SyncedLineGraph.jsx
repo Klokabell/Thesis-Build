@@ -1,7 +1,8 @@
 import Chart from "react-apexcharts";
-const SyncedLineGraph = () => { 
+import { useSignals } from "@preact/signals-react/runtime";
+import { selectedHistory, selectedStock, sliceValue } from "../../utilities/DataProvider";
 
-      
+const SyncedLineGraph = () => { 
        const series = [{
           data: generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 20, {
             min: 10,
