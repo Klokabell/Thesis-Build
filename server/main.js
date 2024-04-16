@@ -1,21 +1,18 @@
-import mongoConnect from "./utilities/mongoConnect.js";
 import express from "express";
 import cors from "cors";
-import "dotenv/config"
-import { router } from "./routing/routes.js"
+import { router } from "./routing/routes.js";
+console.log(process.env.CONNECTION_STRING)
+import client from "./utilities/mongoConnect.js";
 
 const PORT = 3005;
 const app = express();
-app.use(cors())
-app.use(express.json())
-app.use("/", router)
-
-const localURI = process.env.LOCAL_CONNECT_STRING
-
-await mongoConnect(localURI)
+app.use(cors());
+app.use(express.json());
+app.use("/", router);
 
 const main = async () => {
   try {
+    await client.connect();
     app.listen(PORT, () => {
       console.log(`Server is running on http://localhost:${PORT}`);
     });
@@ -23,7 +20,7 @@ const main = async () => {
     console.error("Error connecting to the database:", error);
   }
 };
-console.log("hello")
-main()
+console.log();
+main();
 
-export { app }
+export { app };

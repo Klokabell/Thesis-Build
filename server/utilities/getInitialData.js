@@ -1,9 +1,6 @@
-import mongoConnect from "./mongoConnect.js";
-
-const uri = "mongodb://localhost:27018/";
+import client from "./mongoConnect.js";
 
 const getInitialData = async (dbName, collectionName) => {
-  const client = await mongoConnect(uri);
 
   try {
     console.log(`running getInitialData(${dbName}, ${collectionName})`);
@@ -17,9 +14,10 @@ const getInitialData = async (dbName, collectionName) => {
     return testcollection;
   } catch (err) {
     console.error("'getInitialData' Error: ", err.message);
-  } finally {
+    throw err
+  }/*  finally {
     client.close();
-  }
+  } */
 };
 
 export default getInitialData;

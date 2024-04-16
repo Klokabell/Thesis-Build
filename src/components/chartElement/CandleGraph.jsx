@@ -3,9 +3,14 @@
 import { useSignalEffect, useSignals } from "@preact/signals-react/runtime";
 import Chart from "react-apexcharts";
 import dayjs from "dayjs";
-import { selectedStock, selectedHistory, chartArray, sliceValue } from "../utilities/DataProvider";
+import {
+  selectedStock,
+  selectedHistory,
+  chartArray,
+  sliceValue,
+} from "../../utilities/DataProvider";
 
-const ChartElement = () => {
+const CandleGraph = () => {
   useSignals();
 
   const chartValues = (stocksArray) => {
@@ -20,6 +25,7 @@ const ChartElement = () => {
       enabled: true,
     },
     chart: {
+      group: "stocks",
       dropShadow: {
         enabled: true,
         top: 2,
@@ -50,7 +56,7 @@ const ChartElement = () => {
         },
       },
     },
-    title: { text: selectedStock.value},
+    title: { text: selectedStock.value },
     plotOptions: {
       candlestick: {
         colors: {
@@ -61,19 +67,20 @@ const ChartElement = () => {
     },
   };
 
-  
-  const series = [{ data: chartArray.value}]
-
-
   useSignalEffect(() => {
-    chartArray.value = chartValues(selectedHistory.value.slice(0, sliceValue.value));
-    console.log("selectedHistory.value", selectedHistory.value)
+    if (selectedHistory.value) {
+      let dailyHistory = selectedHistory.value;
+      console.log(
+        "/ChartElement selectedHistory.value.daily",
+        selectedHistory.value
+      );
+      chartArray.value = chartValues(dailyHistory.slice(0, sliceValue.value));
+    }
+    console.log("dailyHistory", selectedHistory.value);
   });
+  const series = [{ data: chartArray.value }];
 
   if (!selectedStock) return <div>Loading...</div>;
-
-
-
 
   return (
     <div className="chartBox" id="apex">
@@ -84,4 +91,4 @@ const ChartElement = () => {
   );
 };
 
-export default ChartElement;
+export default CandleGraph;

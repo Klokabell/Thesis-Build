@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-import { sliceValue } from "../utilities/DataProvider"
+import { timeframe } from "../../utilities/DataProvider"
 
 export const TimeFrameButton = ({limitDate, year}) => {
     const onClickHandler = () => {
-      sliceValue.value = limitDate
+      timeframe.value = limitDate
     }
 
+    console.log("TimeframButton", timeframe.value)
   return (
     <div className="period-btn">
         <button onClick={onClickHandler}>

@@ -21,6 +21,7 @@ function SearchBarAuto() {
   const handleOnSelect = async (item) => {
     selectedStock.value = item.Company
     selectedHistory.value = await fetchSelected(item)
+    console.log("selectedHistory searchBarAuto", selectedHistory.value)
   };
   const formatResult = (item) => {
     return (
@@ -34,7 +35,6 @@ function SearchBarAuto() {
       </>
     );
   };
-
 
 
   if (items) {

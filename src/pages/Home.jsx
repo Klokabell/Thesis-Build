@@ -1,38 +1,30 @@
 /* eslint-disable no-unused-vars */
-import ChartElement from "../components/ChartElement";
-import LineGraph from "../components/chartElement/LineGraph";
+import GraphContainer from "../components/chartElement/GraphContainer";
 import Overview from "../components/report boxes/Overview";
 // import Summary from "../components/report boxes/Summary";
-import { useContext, useState } from "react";
-import { TimeFrameButton } from "../components/TimeFrameButton";
-import { StockState, selectedStock } from "../utilities/DataProvider";
+import { useContext, useEffect, useState } from "react";
+import {
+  StockState,
+  selectedStock,
+  selectedHistory,
+  stockSignal
+} from "../utilities/DataProvider";
 import { useSignals } from "@preact/signals-react/runtime";
-import { RadioContainer } from "../components/chartElement/RadioContainer";
 
 export const Home = () => {
   useSignals();
-  const [chartType, setChartType] = useState("candle");
 
-  console.log("timeframe");
-  const { fetchedRef } = useContext(StockState);
-
+  useEffect(() => {
+    console.log("/Home selectedHistory.value", selectedHistory.value);
+    console.log("/Home selectedStock.value", selectedStock.value);
+  }, []);
   return (
     <div className="page-grid">
       <>
-        {fetchedRef ? (
+        {stockSignal.value ? (
           <div className="chart-container">
             <h2 className="company-title">{selectedStock.value}</h2>
-            <div className="container">
-              <RadioContainer
-                setChartType={setChartType}
-                chartType={chartType}
-              />
-              {chartType === "candle" ? (
-                <ChartElement />
-              ) : (
-                <LineGraph className="custom-candle" />
-              )}
-            </div>
+            <GraphContainer />
           </div>
         ) : (
           <div>Loading...</div>

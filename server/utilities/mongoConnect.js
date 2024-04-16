@@ -1,16 +1,9 @@
-import { MongoClient } from "mongodb";
+import * as dotenv from 'dotenv'
+dotenv.config();
 
-const mongoConnect = async (uri) => {
-  const client = await MongoClient.connect(uri);
-  try {
-    await client.connect()
-    console.log(`connected to ${uri}`)
-    return client
-  }
-  catch (err){
-    console.error("Error connecting to mongodb- ", err)
-    throw err
-  }
-}
+import { MongoClient } from 'mongodb';
+const uri = process.env.CONNECTION_STRING
 
-export default mongoConnect;
+const client = new MongoClient(uri);
+
+export default client;

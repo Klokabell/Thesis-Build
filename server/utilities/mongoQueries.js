@@ -1,5 +1,4 @@
-import mongoConnect from "./mongoConnect";
-const client = await mongoConnect();
+import client from "./mongoConnect.js";
 
 const mongoFind = async () => {
   const dbase = client.db("Mock-Stocks");

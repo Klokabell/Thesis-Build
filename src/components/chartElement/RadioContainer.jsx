@@ -1,11 +1,15 @@
 /* eslint-disable react/prop-types */
 import { LineContainer } from "./LineContainer";
 import { CandleContainer } from "./CandleContainer";
+import { chartType } from "../../utilities/DataProvider";
+import { useSignals } from "@preact/signals-react/runtime";
 
-export const RadioContainer = ({chartType, setChartType}) => {
 
+const RadioContainer = () => {
+  useSignals()
+  console.log("RadioContainer", chartType.value)
   const chartHandler = (e) => {
-    setChartType(e.target.value);
+    chartType.value = e.target.value;
   };
 
   return (
@@ -15,9 +19,9 @@ export const RadioContainer = ({chartType, setChartType}) => {
           <label>
             <input
               type="radio"
-              value={"candle"}
+              value={"candlestick"}
               name="chartType"
-              checked={chartType === "candle"}
+              checked={chartType.value === "candlestick"}
               onChange={chartHandler}
             />
             Candle
@@ -27,14 +31,16 @@ export const RadioContainer = ({chartType, setChartType}) => {
               type="radio"
               value={"line"}
               name="chartType"
-              checked={chartType === "line"}
+              checked={chartType.value === "line"}
               onChange={chartHandler}
             />
             Line
           </label>
         </div>
       </form>
-      {chartType === "candle" ? <CandleContainer /> : <LineContainer />}
+      {chartType.value === "candlestick" ? <CandleContainer /> : <LineContainer />}
     </div>
   );
 };
+
+export default RadioContainer
