@@ -1,16 +1,17 @@
 /* eslint-disable react/prop-types */
-import { timeframe } from "../../utilities/DataProvider"
+import { signal } from "@preact/signals-react"
 
-export const TimeFrameButton = ({limitDate, year}) => {
+export const timeframe = signal(1)
+
+export const TimeFrameButton = ({limitDate}) => {
     const onClickHandler = () => {
       timeframe.value = limitDate
     }
 
-    console.log("TimeframButton", timeframe.value)
   return (
     <div className="period-btn">
         <button onClick={onClickHandler}>
-            {!year ? `${limitDate}d` : `${year}yr`}
+            {limitDate<365 ? `${limitDate}d` : `${Math.floor(limitDate / 365)}yr`}
         </button>
     </div>
   )

@@ -2,12 +2,9 @@
 import GraphContainer from "../components/chartElement/GraphContainer";
 import Overview from "../components/report boxes/Overview";
 // import Summary from "../components/report boxes/Summary";
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
-  StockState,
   selectedStock,
-  selectedHistory,
-  stockSignal
 } from "../utilities/DataProvider";
 import { useSignals } from "@preact/signals-react/runtime";
 
@@ -15,15 +12,13 @@ export const Home = () => {
   useSignals();
 
   useEffect(() => {
-    console.log("/Home selectedHistory.value", selectedHistory.value);
-    console.log("/Home selectedStock.value", selectedStock.value);
   }, []);
   return (
     <div className="page-grid">
       <>
-        {stockSignal.value ? (
+        {selectedStock.value ? (
           <div className="chart-container">
-            <h2 className="company-title">{selectedStock.value}</h2>
+            <h2 className="company-title">{selectedStock.value.Company}</h2>
             <GraphContainer />
           </div>
         ) : (

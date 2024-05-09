@@ -1,7 +1,6 @@
 import express from "express";
 import getInitialData from "../utilities/getInitialData.js";
 import retrieveHistory from "../utilities/retrieveHistory.js";
-import convertToWeekAvg from "../utilities/compounds/convertToWeekAvg.js";
 
 const router = express.Router();
 //const dbName = "COMPANY_COLLECTIONS"
@@ -23,15 +22,9 @@ router.get("/start", async (req, res) => {
 
 router.post("/company", async (req, res) => {
   const {Symbol, Date} = req.body;
-  console.log("POST request received at /company");
   try {
-     const data = await retrieveHistory(dbName, Symbol, Date);
-     console.log(data.length)
-     if (data.length>0) {
-/*       const weeklyAverages = convertToWeekAvg(data)
-      const sendObject = {daily: data, weekly: weeklyAverages}
-      console.log("daily[0]",sendObject.daily[0])
-      console.log("weekly.High",sendObject.weekly.High.length) */
+     const data = await retrieveHistory(dbName, Symbol, Date);  
+     if (data.Daily) {
       return res.status(200).send(data);
      } else {
       return res.status(404).send({ message: "No data found for the given symbol." });

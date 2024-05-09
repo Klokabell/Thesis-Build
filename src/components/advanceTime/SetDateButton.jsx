@@ -7,9 +7,8 @@ const SetDateButton = () => {
 
   const dayPlus = () => {
     let tmrw = new Date(date);
-    console.log("SetDateButton OLD date", date.value)
+    console.log("the date is,", tmrw)
     date.value = new Date(tmrw.setDate(date.value.getDate() + 1))
-    console.log("SetDateButton NEW date", date.value)
   };
 
   return (

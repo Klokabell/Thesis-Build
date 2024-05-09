@@ -1,12 +1,11 @@
-const sortLineData = (array) => {
-
+const sortDailyLineData = (array) => {
   const chartLine = (array, name) => {
     const lineArray = array.map((stock) => {
       return stock[name];
     });
     return lineArray;
   };
-  console.log("sortLine initial Array:", array);
+  //console.log("sortLine initial Array:", array);
 
   const lineObjects = [
     {
@@ -24,10 +23,10 @@ const sortLineData = (array) => {
     {
       name: "Low",
       data: chartLine(array, "Low"),
-    }
+    },
   ];
-  console.log("sortLine formatted Array", lineObjects);
+  //console.log("sortLine formatted Array", lineObjects);
   return lineObjects;
 };
 
-export default sortLineData
+export default sortDailyLineData;

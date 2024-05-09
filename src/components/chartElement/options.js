@@ -38,7 +38,13 @@ const lineOptions = {
     },
   },
   xaxis: {
-    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    categories: [],
+    type: 'category',
+    labels: {
+      formatter: function (val) {
+        return dayjs(val).format("DD/MM/YY");
+      }
+    },
     title: {
       text: "Date",
     },
@@ -75,7 +81,7 @@ const candlestickOptions = {
     type: "category",
     labels: {
       formatter: function (val) {
-        return dayjs(val).format("DD/MM/YY H:mm");
+        return dayjs(val).format("DD/MM/YY");
       },
       style: {
         colors: "#D0CFEC",
@@ -92,7 +98,6 @@ const candlestickOptions = {
       },
     },
   },
-  title: { text: selectedStock.value },
   plotOptions: {
     candlestick: {
       colors: {

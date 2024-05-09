@@ -3,7 +3,7 @@ import Navbar from "./NavBar";
 import SearchBarAuto from "../composites/SearchBarAuto";
 import TimeButton from "./advanceTime/SetDateButton";
 import { useSignals } from "@preact/signals-react/runtime";
-import { stockSignal } from "../utilities/DataProvider";
+import { todayStock } from "../utilities/DataProvider";
 
 
 const Header = () => {
@@ -12,7 +12,7 @@ const Header = () => {
     <header className="header">
       <TimeButton />
       <img className="header__logo" src="../icons/basic_bolt.png"></img>
-      { stockSignal.value.length>0 ?       
+      { todayStock.value.length>0 ?       
         <SearchBarAuto />
         : <div>Loading Data</div>
       } 

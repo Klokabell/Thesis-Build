@@ -7,7 +7,6 @@ import { useSignals } from "@preact/signals-react/runtime";
 
 const RadioContainer = () => {
   useSignals()
-  console.log("RadioContainer", chartType.value)
   const chartHandler = (e) => {
     chartType.value = e.target.value;
   };

@@ -5,10 +5,8 @@ import { effect } from "@preact/signals-react";
 import {
   todayStock,
   selectedStock,
-  selectedHistory
 } from "../utilities/DataProvider";
-import fetchSelected from "../utilities/fetchSelected";
-
+import { fetchSelected, selectedWeekly } from "../utilities/fetchSelected";
 
 function SearchBarAuto() {
   useSignals();
@@ -19,9 +17,8 @@ function SearchBarAuto() {
   effect(() => (items = currentStock));
 
   const handleOnSelect = async (item) => {
-    selectedStock.value = item.Company
-    selectedHistory.value = await fetchSelected(item)
-    console.log("selectedHistory searchBarAuto", selectedHistory.value)
+    selectedStock.value = item
+    await fetchSelected()
   };
   const formatResult = (item) => {
     return (
@@ -35,7 +32,6 @@ function SearchBarAuto() {
       </>
     );
   };
-
 
   if (items) {
     return (

@@ -8,7 +8,4 @@ const dateFormatter = (inputDate) => {
         day, month, year
     }
 }
-
 export default dateFormatter
-
-console.log(dateFormatter("2016-01-04T00:00:00.000Z"))
