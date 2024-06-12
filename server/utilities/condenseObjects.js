@@ -1,20 +1,16 @@
-const condenseObjects = (array) => {
-  //turn object to array of corresponding values
-  const resultObj = {
-    High: [],
-    Low: [],
-    Open: [],
-    Close: [],
-  };
-  const addStockValues = (stock, obj) => {
-    const { High, Low, Open, Close } = stock;
-    obj.High.push(High);
-    obj.Low.push(Low);
-    obj.Open.push(Open);
-    obj.Close.push(Close);
-  };
-  array.forEach((item) => addStockValues(item, resultObj));
-  return resultObj;
-};
+const condenseObjects = async (stocksArray) => {
+  const HighArray = await stocksArray.map(obj => obj.High)
+  const LowArray = await stocksArray.map(obj => obj.Low)
+  const OpenArray = await stocksArray.map(obj => obj.Open)
+  const CloseArray = await stocksArray.map(obj => obj.Close)
+
+  const valuesArray = {
+      High: HighArray,
+      Low: LowArray,
+      Open: OpenArray,
+      Close: CloseArray
+  }
+  return valuesArray
+}
 
 export default condenseObjects;

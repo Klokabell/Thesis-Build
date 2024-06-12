@@ -1,14 +1,12 @@
-import condenseObjects from "../condenseObjects.js";
-import setWeeklyAvg from "../setAverage.js";
+import setWeeklyAvg from "../setWeeklyAverage.js";
 
-const convertToWeekAvg = (historyArray) => {
+const convertToWeekAvg = async (condensedArrays) => {
     
   let weekObject = {};
-  const historySorted = condenseObjects(historyArray);
-  for (let [key, value] of Object.entries(historySorted)) {
-    const weeklyAvg = setWeeklyAvg(value);
-    weekObject[key] = weeklyAvg;
+  for (let [key, value] of Object.entries(condensedArrays)) {
+    weekObject[key] = setWeeklyAvg(key, value);
   }
+  //console.log("convertToWeekAvg", weekObject)
   return weekObject;
 };
 

@@ -1,6 +1,6 @@
 const sortCandleData = (array) => {
 
-  // Format Candlestick array
+  // Formats Candlestick array
   const candleArray = (candleValues) => {
     return candleValues.map((item) => ({
       x: new Date(item.Date),

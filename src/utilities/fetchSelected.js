@@ -1,7 +1,14 @@
-const url = "http://localhost:3005/company";
+import { batch, signal } from "@preact/signals-react";
+import { selectedStock } from "../DataProvider";
 
-const fetchSelected = async (stock) => {
-  const {Symbol, Date } = stock
+const url = "http://localhost:3005/company";
+let selectedDaily = signal([]);
+let selectedWeekly = signal([]);
+
+const fetchSelected = async () => {
+  const { Symbol, Date } = selectedStock.value;
+  //  console.log("fetchSelected Symbol: ", Symbol)
+
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -10,11 +17,22 @@ const fetchSelected = async (stock) => {
       },
       body: JSON.stringify({ Symbol, Date }),
     });
+
     const stockHistory = await response.json();
-    return stockHistory;
+    //    console.log("stockHistory", stockHistory)
+    batch(() => {
+      selectedDaily.value = stockHistory.Daily;
+      selectedWeekly.value = stockHistory.Weekly;
+    });
+    console.log(
+      "selectedDaily: ",
+      selectedDaily.value,
+      "selectedWeekly: ",
+      selectedWeekly.value
+    );
   } catch (err) {
     console.error("fetchSelected Error", err);
   }
 };
 
-export default fetchSelected;
+export { selectedDaily, selectedWeekly, fetchSelected };

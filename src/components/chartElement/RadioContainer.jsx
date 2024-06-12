@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
 import { LineContainer } from "./LineContainer";
 import { CandleContainer } from "./CandleContainer";
-import { chartType } from "../../utilities/DataProvider";
+import { chartType } from "../../DataProvider";
 import { useSignals } from "@preact/signals-react/runtime";
 
-
 const RadioContainer = () => {
-  useSignals()
-  console.log("RadioContainer", chartType.value)
+  useSignals();
   const chartHandler = (e) => {
     chartType.value = e.target.value;
   };
@@ -38,9 +36,13 @@ const RadioContainer = () => {
           </label>
         </div>
       </form>
-      {chartType.value === "candlestick" ? <CandleContainer /> : <LineContainer />}
+      {chartType.value === "candlestick" ? (
+        <CandleContainer />
+      ) : (
+        <LineContainer />
+      )}
     </div>
   );
 };
 
-export default RadioContainer
+export default RadioContainer;

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const dataFetcher = async (url) => {
+const initialDataFetcher = async (url) => {
   try {
     const res = await fetch("http://localhost:3005/start"); // Changed to dynamic
     const fetched = await res.json();
@@ -10,4 +10,4 @@ const dataFetcher = async (url) => {
   }
 };
 
-export default dataFetcher;
+export default initialDataFetcher;

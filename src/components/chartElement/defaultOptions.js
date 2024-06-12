@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import dayjs from "dayjs";
-import { selectedStock } from "../../DataProvider"
+import { todayStock } from "../../DataProvider";
 
-const lineOptions = {
+const lineOptions = () => ({
   chart: {
     height: 350,
     type: "line",
@@ -19,16 +19,12 @@ const lineOptions = {
     },
   },
   dataLabels: {
-    enabled: false,
+    enabled: true,
   },
   stroke: {
     curve: "smooth",
-    colors: ['#77B6EA', '#545454', '#d82c27', '#cced12'],
-    width: 2
-  },
-  title: {
-    text: selectedStock.value ? selectedStock.value : "",
-    align: "left",
+    colors: ["#77B6EA", "#545454", "#d82c27", "#cced12"],
+    width: 2,
   },
   grid: {
     borderColor: "#e7e7e7",
@@ -46,7 +42,7 @@ const lineOptions = {
   yaxis: {
     title: {
       text: "Value($)",
-    }
+    },
   },
   legend: {
     position: "top",
@@ -54,10 +50,10 @@ const lineOptions = {
     floating: true,
     offsetY: -25,
     offsetX: -5,
-  }
-};
+  },
+});
 
-const candlestickOptions = {
+const candlestickOptions = () => ({
   tooltip: {
     enabled: true,
   },
@@ -70,6 +66,9 @@ const candlestickOptions = {
       opacity: 0.2,
     },
     type: "candlestick",
+  },
+  dataLabels: {
+    enabled: false,
   },
   xaxis: {
     type: "category",
@@ -92,7 +91,7 @@ const candlestickOptions = {
       },
     },
   },
-  title: { text: selectedStock.value ? selectedStock.value : "" },
+  title: { text: "" },
   plotOptions: {
     candlestick: {
       colors: {
@@ -101,6 +100,6 @@ const candlestickOptions = {
       },
     },
   },
-};
+});
 
 export { candlestickOptions, lineOptions };

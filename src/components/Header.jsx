@@ -1,21 +1,21 @@
 import Navbar from "./NavBar";
 //import SearchBar from "../composites/SearchBar/SearchBar";
 import SearchBarAuto from "../composites/SearchBarAuto";
-import TimeButton from "./advanceTime/SetDateButton";
+import SetDateButton from "./SetDateButton";
 import { useSignals } from "@preact/signals-react/runtime";
-import { stockSignal } from "../utilities/DataProvider";
-
+import { todayStock } from "../DataProvider";
 
 const Header = () => {
   useSignals();
   return (
     <header className="header">
-      <TimeButton />
+      <SetDateButton />
       <img className="header__logo" src="../icons/basic_bolt.png"></img>
-      { stockSignal.value.length>0 ?       
+      {todayStock.value.length > 0 ? (
         <SearchBarAuto />
-        : <div>Loading Data</div>
-      } 
+      ) : (
+        <div>Loading Data</div>
+      )}
       <h1 className="heading-primary">
         Small Cap <span>Market Trader</span>
       </h1>

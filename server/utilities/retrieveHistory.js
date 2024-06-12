@@ -1,22 +1,26 @@
 import client from "./mongoConnect.js";
+import condenseObjects from "./condenseObjects.js";
+import convertToWeekAvg from "../utilities/compounds/convertToWeekAvg.js";
 
-const retrieveHistory = async (dbName, symbol, date) => {
-  const queryDate = new Date(date)
+const retrieveHistory = async (companyDB, symbol, date) => {
+  const queryDate = new Date(date);
   try {
-    const companyHistory = await client
-      .db(dbName)
+    const dailyHistory = await client
+      .db(companyDB)
       .collection(symbol)
       .find({ Date: { $lte: queryDate } })
       .sort({ Date: -1 })
       .toArray();
-      
-    console.log("history retrieved", symbol, companyHistory.length)
-/*     const companyName = await client
-      .db("Users_Collections")
-      .collection("names_with_symbols")
-      .find({ Company: company }, { title: 1, _id: 0 })
-      .toArray() */
-    return companyHistory; /* , Company: companyName[0].title */
+
+    const condensedArrays = await condenseObjects(dailyHistory);
+    console.log("DailyHistory final", dailyHistory[dailyHistory.length-1])
+
+    const weeklyHistory = await convertToWeekAvg(condensedArrays);
+    const companyHistory = {
+      Daily: dailyHistory,
+      Weekly: weeklyHistory,
+    };
+    return companyHistory;
   } catch (err) {
     console.error("retrieveHistory Error", err);
   }
