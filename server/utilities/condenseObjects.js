@@ -1,4 +1,6 @@
 const condenseObjects = async (stocksArray) => {
+
+
   const HighArray = await stocksArray.map(obj => obj.High)
   const LowArray = await stocksArray.map(obj => obj.Low)
   const OpenArray = await stocksArray.map(obj => obj.Open)

@@ -8,7 +8,7 @@ import {
   selectedHistory,
   chartArray,
   sliceValue,
-} from "../../utilities/DataProvider";
+} from "../src/DataProvider";
 
 const CandleGraph = () => {
   useSignals();
@@ -23,20 +23,20 @@ const CandleGraph = () => {
   const options = {
     tooltip: {
       enabled: true,
+      followCursor: false
     },
     chart: {
-      group: "stocks",
+      type: "candlestick",
       dropShadow: {
         enabled: true,
         top: 2,
         left: 5,
         blur: 3,
         opacity: 0.2,
-      },
-      type: "candlestick",
+      }      
     },
     xaxis: {
-      type: "category",
+      type: "datetime",
       labels: {
         formatter: function (val) {
           return dayjs(val).format("DD/MM/YY H:mm");
@@ -44,10 +44,7 @@ const CandleGraph = () => {
         style: {
           colors: "#D0CFEC",
         },
-      },
-      tooltip: {
-        offsetX: -100,
-      },
+      }
     },
     yaxis: {
       labels: {
@@ -69,6 +66,7 @@ const CandleGraph = () => {
 
   useSignalEffect(() => {
     if (selectedHistory.value) {
+    console.log("selectedHistory")
       let dailyHistory = selectedHistory.value;
       console.log(
         "/ChartElement selectedHistory.value.daily",

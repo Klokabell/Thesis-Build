@@ -9,8 +9,8 @@ export const TimeFrameButton = ({limitDate}) => {
     }
 
   return (
-    <div className="period-btn">
-        <button onClick={onClickHandler}>
+    <div className="px-2 bg-gray-400 text-white hover:bg-slate-600 active:bg-slate-800">
+        <button onClick={onClickHandler} className="">
             {limitDate<365 ? `${limitDate}d` : `${Math.floor(limitDate / 365)}yr`}
         </button>
     </div>

@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import "./style/main.css";
+import "./index.css"
 import DataProvider from "./DataProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

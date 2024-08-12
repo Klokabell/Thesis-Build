@@ -1,23 +1,26 @@
 /* eslint-disable no-unused-vars */
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { useState } from "react"
 import { useSignals } from "@preact/signals-react/runtime";
 import { effect } from "@preact/signals-react";
 import { todayStock, selectedStock } from "../DataProvider";
-import { fetchSelected, selectedWeekly } from "../utilities/fetchSelected";
+import { fetchSelected } from "../utilities/fetchSelected";
 
 function SearchBarAuto() {
   useSignals();
 
-  let items = todayStock.value || []
-
-  effect(() => (items = todayStock.value || []));
+  const currentStock = todayStock.value
+  let items = []
+  
+  effect(() => (items = currentStock))
 
   const handleOnSelect = async (item) => {
-    console.log("selected: ", item)
+    console.log("selected: ", item.Company)
     selectedStock.value = item;
     await fetchSelected();
-    console.log("selectedWeekly.value.Open", selectedWeekly.value);
   };
+
+
   const formatResult = (item) => {
     return (
       <>
@@ -25,7 +28,7 @@ function SearchBarAuto() {
           {item.Symbol}
         </span>
         <span style={{ display: "block", textAlign: "left" }}>
-          {item.company}
+          {item.Company}
         </span>
       </>
     );
@@ -33,13 +36,13 @@ function SearchBarAuto() {
 
   if (items) {
     return (
-      <div style={{ width: 400 }}>
+      <div className="self-center w-60 z-50">
         <ReactSearchAutocomplete
           items={items}
           onSelect={handleOnSelect}
           autoFocus
           formatResult={formatResult}
-          fuseOptions={{ keys: ["company", "Symbol"] }}
+          fuseOptions={{ keys: ["Company", "Symbol"] }}
           resultStringKeyName="Company"
           maxResults={6}
         />

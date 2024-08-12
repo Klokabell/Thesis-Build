@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { LineContainer } from "./LineContainer";
-import { CandleContainer } from "./CandleContainer";
-import { chartType } from "../../DataProvider";
+import { DayLineContainer } from "./timeframeset/TimeframeLine";
+import { CandleContainer } from "./timeframeset/TimeframeCandle";
+import { chartType } from "../DataProvider";
 import { useSignals } from "@preact/signals-react/runtime";
 
 const RadioContainer = () => {
@@ -11,7 +11,7 @@ const RadioContainer = () => {
   };
 
   return (
-    <div className="radio-container">
+    <div className="radio-container flex flex-row justify-between">
       <form>
         <div className="chart-radio">
           <label>
@@ -39,7 +39,7 @@ const RadioContainer = () => {
       {chartType.value === "candlestick" ? (
         <CandleContainer />
       ) : (
-        <LineContainer />
+        <DayLineContainer />
       )}
     </div>
   );

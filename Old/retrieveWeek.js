@@ -1,4 +1,4 @@
-import client from "./mongoConnect.js";
+import client from "../server/utilities/mongoConnect.js";
 
 const retrieveWeek = async (currentWeek) => {
   const collection = client.db("Mock-stocks").collection("2016_Below_10");

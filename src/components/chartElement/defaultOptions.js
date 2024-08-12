@@ -3,8 +3,11 @@ import dayjs from "dayjs";
 import { todayStock } from "../../DataProvider";
 
 const lineOptions = () => ({
+  tooltip : {
+    enabled: false
+  },
   chart: {
-    height: 350,
+    height: "auto",
     type: "line",
     dropShadow: {
       enabled: true,
@@ -34,10 +37,19 @@ const lineOptions = () => ({
     },
   },
   xaxis: {
-    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    type: "datetime",
+    categories: [],
     title: {
       text: "Date",
     },
+    labels: {
+      datetimeFormatter: {
+        year: 'yyyy',
+        month: 'MMM \'yy',
+        day: 'dd MMM',
+        hour: 'HH:mm'
+      }
+    }
   },
   yaxis: {
     title: {
@@ -58,6 +70,7 @@ const candlestickOptions = () => ({
     enabled: true,
   },
   chart: {
+    height: "auto",
     dropShadow: {
       enabled: true,
       top: 2,

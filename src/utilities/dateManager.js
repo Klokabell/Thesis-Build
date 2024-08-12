@@ -1,4 +1,5 @@
 import { date } from "../DataProvider"
+
 const dateFormatter = (inputDate) => {
     const date = new Date(inputDate)
     const day = date.getDate()

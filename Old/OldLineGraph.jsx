@@ -6,10 +6,9 @@ import Chart from "react-apexcharts";
 import {
   selectedHistory,
   selectedStock,
-  sliceValue,
-} from "../../utilities/DataProvider";
+} from "../src/DataProvider";
 
-const LineGraph = () => {
+const OldLine = () => {
   useSignals();
 
   const chartLine = (values, name) => {
@@ -18,7 +17,7 @@ const LineGraph = () => {
     });
     return lineArray;
   };
-  const slicedArray = selectedHistory.value.slice(0, sliceValue.value);
+  const slicedArray = selectedHistory.value.slice(0, 100);
 
   const chartValues = [
     {
@@ -40,8 +39,10 @@ const LineGraph = () => {
   ];
 
   const options = {
+    tooltip: {
+      enabled: false,
+    },
     chart: {
-      height: 350,
       type: "line",
       dropShadow: {
         enabled: true,
@@ -74,7 +75,7 @@ const LineGraph = () => {
       },
     },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+      type: "datetime",
       title: {
         text: "Date",
       },
@@ -103,4 +104,4 @@ const LineGraph = () => {
     </div>
   );
 };
-export default LineGraph;
+export default OldLine;

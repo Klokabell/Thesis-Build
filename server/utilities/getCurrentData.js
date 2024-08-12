@@ -1,14 +1,14 @@
 import client from "./mongoConnect.js";
 
-
-const getInitialData = async (dbName, collectionName) => {
+const getCurrentData = async (dbName, collectionName, month) => {
 
   try {
-    console.log(`running getInitialData(${dbName}, ${collectionName})`);
+    console.log(`running getCurrentData(${dbName}, ${collectionName})`);
     const testcollection = await client
       .db(dbName)
       .collection(collectionName)
-      .find({ Month: 1 })
+      .find({ Month: month })
+      .sort({ Close: -1 })
       .toArray();
     return testcollection;
   } catch (err) {
@@ -17,4 +17,4 @@ const getInitialData = async (dbName, collectionName) => {
   }
 };
 
-export default getInitialData;
+export default getCurrentData;

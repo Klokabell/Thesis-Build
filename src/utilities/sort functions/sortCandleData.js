@@ -1,14 +1,11 @@
 const sortCandleData = (array) => {
 
-  // Formats Candlestick array
-  const candleArray = (candleValues) => {
-    return candleValues.map((item) => ({
-      x: new Date(item.Date),
-      y: [item.Open, item.High, item.Low, item.Close],
-    }));
-  };
+  const candleArray = array.map((item) => ({
+    x: new Date(item.Date),
+    y: [item.Open, item.High, item.Low, item.Close],
+  }));
 
-  return candleArray(array)
+  return candleArray
 };
 
 export default sortCandleData;

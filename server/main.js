@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { promisify } from "util"
-import {router} from "./routing/routes.js"
+import { promisify } from "util";
+import { router } from "./routing/routes.js";
 import client from "./utilities/mongoConnect.js";
 
 const sleep = promisify(setTimeout);
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use("/", router);
 
 const main = async () => {
-  let connected = false
+  let connected = false;
   let attempt = 0;
   const limit = 3;
 
@@ -23,16 +23,16 @@ const main = async () => {
       app.listen(PORT, () => {
         console.log(`Server is running on http://localhost:${PORT}`);
       });
-      connected = true
+      connected = true;
     } catch (error) {
-      attempt++
+      attempt++;
       console.error(`Connection failed, attempting retry ${attempt}`);
-      if(attempt<limit){
-        await sleep(5000)
+      if (attempt < limit) {
+        await sleep(5000);
       } else {
-        console.log(`Retry limit reached, please resolve issue and try again`)
-        process.exit(1)
-      } 
+        console.log(`Retry limit reached, please resolve issue and try again`);
+        process.exit(1);
+      }
     }
   }
 };

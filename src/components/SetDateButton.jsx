@@ -38,7 +38,7 @@ const SetDateButton = () => {
   };
 
   return (
-    <button className="time-btn" onClick={advanceTime}>
+    <button className="time-btn bg-slate-100 rounded-md px-1 self-center ml-8 mr-6" onClick={advanceTime}>
       Next Day
     </button>
   );

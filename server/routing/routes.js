@@ -1,33 +1,31 @@
 import express from "express";
-import getInitialData from "../utilities/getInitialData.js";
+import getCurrentData from "../utilities/getCurrentData.js";
 import retrieveHistory from "../utilities/retrieveHistory.js";
 import retrieveUpdate from "../utilities/retrieveUpdate.js";
 
 const router = express.Router();
-//const dbName = "COMPANY_COLLECTIONS"
-//const dbName3 = "Users_Collections";
-const companyDB = "Mock-stocks"
+const companiesDB = "Stock-Histories"
 
 const dbName = "2016"
-const collName = "Stock_Collection"
+const collName = "Stocks"
 
 
-router.get("/start", async (req, res) => {
+router.post("/start", async (req, res) => {
+   const { month } = req.body
    try{
       console.log("initial get request received at /start");
-      const data = await getInitialData(dbName, collName);
+      const data = await getCurrentData(dbName, collName, month);
       console.log("initial data sent");
       res.send(data);
    } catch (err){
       console.error("Initial Data Error: ", err)
    }
-
 });
 
 router.post("/company", async (req, res) => {
   const {Symbol, Date} = req.body;
   try {
-     const data = await retrieveHistory(companyDB, Symbol, Date);  
+     const data = await retrieveHistory(companiesDB, Symbol, Date);  
      if (data.Daily) {
       return res.status(200).send(data);
      } else {
