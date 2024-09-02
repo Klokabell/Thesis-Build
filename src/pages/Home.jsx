@@ -1,50 +1,36 @@
 /* eslint-disable no-unused-vars */
-import GraphContainer from "../components/GraphContainer";
+import { TopGraphContainer, HistoryGraphContainer } from "../components/chartContainers";
+import SingleCompanyCandle from "../components/chartElement/candle/specific/SingleCompanyCandle";
+import SingleCompanyLine from "../components/chartElement/line/SingleCompanyLine";
 import Overview from "../components/report boxes/Overview";
 // import Summary from "../components/report boxes/Summary";
 import { useEffect, useContext } from "react";
-import { selectedStock, todayStock, StockState } from "../DataProvider";
+import { todayStock, StockState, selectedName } from "../DataProvider";
 import { useSignals } from "@preact/signals-react/runtime";
+import DateDisplay from "../components/date/DateDisplay";
 
 export const Home = () => {
   useSignals();
 
-  console.log(todayStock.value.length);
   if (!todayStock.value.length === 0) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="home-component grid grid-cols-1 grid-rows-auto gap-3 px-20 ">
-      {todayStock.value.length > 0 ? (
-        <GraphContainer />
-      ) : (
-        <div>No Data Available</div>
-      )}
-      <div className="flex flex-row justify-around h-fit pb-10">
-        <Overview
-          period={"Monthly"}
-          values={{
-            perc: 6,
-            dollar: 1205,
-            available: 4600,
-            spent: 1700,
-            total: 5000,
-          }}
-          id="overview_month"
-        />
-        <Overview
-          period={"Daily"}
-          values={{
-            perc: 1.4,
-            dollar: 125,
-            available: 4600,
-            spent: 520,
-            total: 5000,
-          }}
-          id="overview_day"
-        />
-      </div>
+  <div className="home-component w-full">
+    <DateDisplay />
+    <div className=" grid grid-cols-[1fr_1fr_1fr_0.5fr_1fr_1fr_1fr] grid-rows-1 px-10 pb-5">
+      <TopGraphContainer className="topgraph col-start-2 col-span-5 justify-items-center mb-10"/>
+      <div className="selectedName row-start-2 col-start-3 col-span-3 justify-self-center mt-[15%] py-4 font-lato font-bold text-5xl">{selectedName.value}</div>
+      <SingleCompanyCandle className="singlecandle row-start-3 col-start-1 col-span-3"/>
+{/*       <SingleCompanyLine className="singleline row-start-3 col-start-5 col-span-3" /> */}
     </div>
+  </div>
+
   );
 };
+{/*       {todayStock.value.length > 0 ? (
+        <TopGraphContainer className="topgraph col-start-3 col-span-3 mb-10"/>
+      ) : (
+        <div>No Data Available</div>
+      )} */}

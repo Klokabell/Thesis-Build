@@ -1,25 +1,24 @@
 /* eslint-disable no-unused-vars */
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { useState } from "react"
+import { selectedName } from "../DataProvider";
 import { useSignals } from "@preact/signals-react/runtime";
 import { effect } from "@preact/signals-react";
-import { todayStock, selectedStock } from "../DataProvider";
+import { todayStock } from "../DataProvider";
 import { fetchSelected } from "../utilities/fetchSelected";
 
 function SearchBarAuto() {
   useSignals();
 
-  const currentStock = todayStock.value
-  let items = []
-  
-  effect(() => (items = currentStock))
+  const currentStock = todayStock.value;
+  let items = [];
+
+  effect(() => (items = currentStock));
 
   const handleOnSelect = async (item) => {
-    console.log("selected: ", item.Company)
-    selectedStock.value = item;
-    await fetchSelected();
+    
+    selectedName.value = item.Company
+    await fetchSelected(item);
   };
-
 
   const formatResult = (item) => {
     return (

@@ -5,18 +5,14 @@ const retrieveHistory = async (companyDB, symbol, date) => {
   const queryDate = new Date(date);
   
   try {
-    const dailyHistory = await retrieveDailyHistory(companyDB, symbol, queryDate)
-    const weeklyAverages = await retrieveAverages(symbol, "week")
-    const monthlyAverages = await retrieveAverages(symbol, "month")
-    const yearlyAverages = await retrieveAverages(symbol, "year") 
+    const Daily = await retrieveDailyHistory(companyDB, symbol, queryDate)
+    const Weekly = await retrieveAverages(symbol, "week")
+    const Monthly = await retrieveAverages(symbol, "month")
+    const Yearly = await retrieveAverages(symbol, "year") 
 
     //const weeklyHistory = await convertToWeekAvg(condensedArrays);
-    const companyHistory = {
-      Daily: dailyHistory,
-      weeklyAverages: weeklyAverages,
-      monthlyAverages: monthlyAverages,
-      yearlyAverages: yearlyAverages
-    };
+    const companyHistory = { Daily, Weekly, Monthly, Yearly };
+    console.log("companyHistory: ", companyHistory)
     return companyHistory;
   } catch (err) {
     console.error("retrieveHistory Error", err);

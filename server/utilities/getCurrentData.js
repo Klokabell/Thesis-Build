@@ -8,7 +8,7 @@ const getCurrentData = async (dbName, collectionName, month) => {
       .db(dbName)
       .collection(collectionName)
       .find({ Month: month })
-      .sort({ Close: -1 })
+      .sort({ Close: -1 }) //arrange by close descending
       .toArray();
     return testcollection;
   } catch (err) {

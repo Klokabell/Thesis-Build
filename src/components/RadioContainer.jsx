@@ -6,7 +6,7 @@ import { useSignals } from "@preact/signals-react/runtime";
 
 const RadioContainer = () => {
   useSignals();
-  const chartHandler = (e) => {
+  const onChangeHandler = (e) => {
     chartType.value = e.target.value;
   };
 
@@ -20,7 +20,7 @@ const RadioContainer = () => {
               value={"candlestick"}
               name="chartType"
               checked={chartType.value === "candlestick"}
-              onChange={chartHandler}
+              onChange={onChangeHandler}
             />
             Candle
           </label>
@@ -30,7 +30,7 @@ const RadioContainer = () => {
               value={"line"}
               name="chartType"
               checked={chartType.value === "line"}
-              onChange={chartHandler}
+              onChange={onChangeHandler}
             />
             Line
           </label>

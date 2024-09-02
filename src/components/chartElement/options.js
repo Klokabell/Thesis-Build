@@ -75,7 +75,7 @@ const candlestickOptions = {
     type: "category",
     labels: {
       formatter: function (val) {
-        return dayjs(val).format("DD/MM/YY H:mm");
+        return dayjs(val).format("DD/MM/YY");
       },
       style: {
         colors: "#D0CFEC",
@@ -92,7 +92,7 @@ const candlestickOptions = {
       },
     },
   },
-  title: { text: selectedStock.value ? selectedStock.value : "" },
+  title: { text: selectedStock.value ? selectedStock.value : "Todays Top Stocks" },
   plotOptions: {
     candlestick: {
       colors: {

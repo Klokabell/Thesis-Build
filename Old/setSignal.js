@@ -1,4 +1,4 @@
-import { signal } from "@preact/signals-react";
+/* import { signal } from "@preact/signals-react";
 import updateStock from "./sort functions/filterStock";
 
 const setCurrentDaySignal = async (date, stockSignal, fetchedData) => {
@@ -11,3 +11,4 @@ const setCurrentDaySignal = async (date, stockSignal, fetchedData) => {
   }
 
 export default setCurrentDaySignal;
+ */

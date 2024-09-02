@@ -6,9 +6,9 @@ const App = () => {
   useSignals();
 
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden">
+    <div className="app">
       <Header />
-      <main className="flex-1">
+      <main>
         <Home />
       </main>
     </div>

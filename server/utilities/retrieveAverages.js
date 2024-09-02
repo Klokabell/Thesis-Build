@@ -1,7 +1,7 @@
 import client from "./mongoConnect.js";
 
 const retrieveAverages = async (collName, field) => {
-  const fieldAverage = `${field}Averages`;
+  const fieldAverage = "Averages";
   const getAverages = await client.db("Stock-Histories").collection(collName)
     .aggregate([
       {
@@ -26,6 +26,16 @@ const retrieveAverages = async (collName, field) => {
             },
           },
         },
+      },
+      {
+        $addFields: {
+          Avg: {
+            $sortArray: {
+              input: "$Avg",
+              sortBy: { [field]: 1 }
+            }
+          }
+        }
       },
       {
         $sort: { _id: -1 },

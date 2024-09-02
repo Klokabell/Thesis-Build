@@ -1,32 +1,29 @@
-import { date } from "../DataProvider"
+import { getDate, getWeek, getMonth, getYear, format,  addDays } from "date-fns";
 
-const dateFormatter = (inputDate) => {
-    const date = new Date(inputDate)
-    const day = date.getDate()
-    const month =  (1+date.getMonth())
+const dateToValuesFormatter = (inputDate) => {
+  const date = new Date(inputDate);
+  const day = getDate(date);
+  const month = getMonth(date) + 1;
+  const week = getWeek(date);
+  const year = getYear(date);
+  const weekDay = format(date, "EEEE")
 
-    return {
-        day, month
-    }
-}
-
-
-const addDay = (currentDate) => {
-
-  const dayPlus = (date) => {
-    let tmrw = new Date(date);
-    do{
-      tmrw.setDate(tmrw.getDate()+1)
-    } while (tmrw.getDay() === 0 || tmrw.getDay() === 6)
-    return tmrw
+  return {
+    day,
+    month,
+    week,
+    year,
+    weekDay
+  };
 };
 
+const valuesToDateFormatter = (values) => {
+  return format(new Date(values.year, values.month, values.day), "MM/dd/yyyy");
+};
 
-    let tmrw = dayPlus(currentDate);
-    date.value = tmrw;
-    sessionStorage.setItem("date", JSON.stringify(tmrw));
-  };
+const addDay = (inputDate) => {
+  const currentDate = new Date(inputDate);
+  return addDays(currentDate, 1)
+};
 
-
-
-export { dateFormatter, addDay }
+export { dateToValuesFormatter, addDay, valuesToDateFormatter };
