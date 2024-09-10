@@ -3,7 +3,15 @@ import dayjs from "dayjs";
 import { selectedHistory } from "../../DataProvider";
 import { selectedName } from "../../DataProvider";
 
-/* const baseLineOptions = () => ({
+
+const titleMetric = {
+  Daily: "Day",
+  Weekly: "Week",
+  Monthly: "Month",
+  Yearly: "Year",
+};
+
+const baseLineOptions = (unit, datesArray, period) => ({
 
   chart: {
     height: "auto",
@@ -17,127 +25,52 @@ import { selectedName } from "../../DataProvider";
       opacity: 0.2,
     },
     toolbar: {
-      show: false,
+      show: true,
     },
-  },
-  dataLabels: {
-    enabled: true,
+    background: "#4b5563",
   },
   stroke: {
     curve: "smooth",
-    colors: ["#77B6EA", "#545454", "#d82c27", "#cced12"],
-    width: 2,
+    colors: ["#77B6EA", "#37A644", "#cced12", "#d82c27"],
+    width: 4,
   },
   grid: {
+    position: "back",
     borderColor: "#e7e7e7",
     row: {
-      colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-      opacity: 0.5,
+      colors: ["transparent"]
     },
   },
   xaxis: {
-    type: "datetime",
-    categories: [],
-    title: {
-      text: "Date",
-    },
-    labels: {
-      datetimeFormatter: {
-        year: "yyyy",
-        month: "MMM 'yy",
-        day: "dd MMM",
-        hour: "HH:mm",
-      },
-    },
-  },
-  yaxis: {
-    title: {
-      text: "Value($)",
-    },
-  },
-  legend: {
-    position: "top",
-    horizontalAlign: "right",
-    floating: true,
-    offsetY: -25,
-    offsetX: -5,
-  },
-  tooltip: {
-    shared: false
-  }
-});
-
-
-const multiCompFields = (variable) => ({
-  title: {
-    text: `Top ${variable} Companies`,
-  },
-  xaxis: {
-    title: "Companies",
     type: "category",
-    labels: {
-      formatter: function (val) {
-        return val;
-      },
-      style: {
-        fontSize: "14px",
-        fontFamily: "Arial, sans-serif",
-        fontWeight: 500,
-        cssClass: "apexcharts-xaxis-label",
-      },
-      rotate: -45,
-      rotateAlways: true,
-      trim: true,
-    },
-    tooltip: {
-      offsetX: -100,
-    },
-  },
-}); */
-
-
-
-
-const baseLineOptions = (variable, Dates) => ({
-
-  chart: {
-    height: "auto",
-    type: "line",
-    dropShadow: {
-      enabled: true,
-      color: "#000",
-      top: 18,
-      left: 7,
-      blur: 10,
-      opacity: 0.2,
-    },
-    toolbar: {
-      show: false,
-    },
-    background: "#FFF4E4",
-  },
-  stroke: {
-    curve: "smooth",
-    colors: ["#77B6EA", "#545454", "#d82c27", "#cced12"],
-    width: 2,
-  },
-  grid: {
-    borderColor: "#e7e7e7",
-    row: {
-      colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-      opacity: 0.5,
-    },
-  },
-  xaxis: {
-    type: "datetime",
-    categories: Dates,
+    categories: datesArray,
     title: {
-      text: "Date",
+      text: titleMetric[period]!=="Day" ? `${titleMetric[period]} Spanning:` : "Date",
+      style: {
+        color: "#fafafa",
+        fontSize: '16px',
+        fontWeight: 500,
+      }
+    },
+    labels: {
+      style: {
+        colors: "#fafafa",
+      }
     },
   },
   yaxis: {
     title: {
-      text: "Value($)",
+      text: "Value ($)",
+      style: {
+        fontSize: "1rem",
+        color: "#fafafa",
+        fontWeight: 600
+      }
+    },
+    labels: {
+      style: {
+        colors: "#fafafa"
+      }
     },
   },
   legend: {
@@ -146,9 +79,15 @@ const baseLineOptions = (variable, Dates) => ({
     floating: true,
     offsetY: -25,
     offsetX: -5,
+    labels: {
+      colors: "#fafafa"      
+    },
+    markers: {
+      colors: ["#37A644", "#77B6EA", "#d82c27", "#cced12"]
+    }
   },
   title: {
-    text: `${selectedName.value} Previous ${variable} Days`,
+    text:  `Previous ${unit>1 ? unit + " " + titleMetric[period] + "s" : titleMetric[period]}`,
     style: {
       color: "#fafafa"
     }
@@ -164,8 +103,8 @@ const baseLineOptions = (variable, Dates) => ({
 });
 
 
-const lineOptions = (isSingleCompany, variable, Dates) => {
-  return baseLineOptions(variable, Dates)
+const lineOptions = (unit, datesArray, period) => {
+  return baseLineOptions(unit, datesArray, period)
 };
 
 export { lineOptions };

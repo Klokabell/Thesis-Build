@@ -9,14 +9,12 @@ import { fetchSelected } from "../utilities/fetchSelected";
 function SearchBarAuto() {
   useSignals();
 
-  const currentStock = todayStock.value;
   let items = [];
 
-  effect(() => (items = currentStock));
+  effect(() => (items = todayStock.value));
 
   const handleOnSelect = async (item) => {
-    
-    selectedName.value = item.Company
+    selectedName.value = item.Company;
     await fetchSelected(item);
   };
 

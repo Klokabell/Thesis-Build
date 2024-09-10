@@ -1,31 +1,21 @@
 import { date } from "../../DataProvider";
+import { compareDates } from "../dateTools";
+import { currentMonthStocks } from "../../DataProvider";
 
-const getTodayStock = (monthData) => {
-  const gameDate = new Date(date.value);
-  const gameYear = gameDate.getFullYear()
-  const gameMonth = gameDate.getMonth()
-  const gameDay = gameDate.getDate()
+const getTodayStock = () => {
+  const gameDate = date.value;
+  const monthData = currentMonthStocks.value;
 
   const filteredStock = monthData.filter((stock) => {
-    const stockDate = new Date(stock.Date);
-    const stockYear = stockDate.getFullYear()
-    const stockMonth = stockDate.getMonth()
-    const stockDay = stockDate.getDate()
-    return (
-      stockYear === gameYear &&
-      stockMonth === gameMonth &&
-      stockDay === gameDay
-    )
+    const stockDate = stock.Date;
+    return compareDates(gameDate, stockDate);
   });
-
-  console.log("filteredStock[0]", filteredStock[0])
 
   const currentStockArray = filteredStock.map((item) => ({
     ...item,
     id: item._id, //searchbar needs id instead of _id
   }));
-  
-  return currentStockArray
+  return currentStockArray;
 };
 
 export default getTodayStock;

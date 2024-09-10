@@ -1,22 +1,13 @@
 import { useSignals } from "@preact/signals-react/runtime"
+import { computed } from "@preact/signals-react"
 import { effect } from "@preact/signals-react"
 import { date } from "../DataProvider"
+import { currentMonthStocks } from "../DataProvider"
+
 
 const updateStock = async() => {
-
-    function stockUpdater(date) {
-        
-    }
     
 
-    effect(() => {
-        const currentDate = new Date(date.value)
-        const day = currentDate.getDate()
-
-        if (day === 1 || day === 15) {
-            stockUpdater(currentDate)
-        }
-    })
 }
 
 export default updateStock

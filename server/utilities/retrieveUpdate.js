@@ -9,7 +9,7 @@ const retrieveUpdate = async (month) => {
     const updatedCollection = await client
       .db(dbName)
       .collection(collName)
-      .find({ Month: { $eq: month } })
+      .find({ Month: { $eq: month + 1} })
       .toArray();
     return updatedCollection;
   } catch (error) {

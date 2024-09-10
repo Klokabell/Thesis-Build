@@ -4,7 +4,7 @@ import { selectedMetric } from "../../DataProvider";
 // import metricSwitch from "./metricSwitch";
 
 
-const MetricDropdown = () => {
+const PeriodDropdown = () => {
     useSignal()
 
   const onChangeHandler = (e) => {
@@ -23,4 +23,4 @@ const MetricDropdown = () => {
   );
 };
 
-export default MetricDropdown
+export default PeriodDropdown

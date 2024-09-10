@@ -3,7 +3,7 @@
 import Chart from "react-apexcharts";
 import { candlestickOptions } from "../../CandleOptions";
 import TimeFrameComponent from "../../../timeframe/composites/TimeFrameComponent";
-import { multiCandleData } from "../../../../utilities/sort functions/sortCandleData";
+import sortCandleData from "../../../../utilities/sort functions/sortCandleData";
 import { useState, useEffect } from "react";
 import { selectedMetric, todayStock } from "../../../../DataProvider";
 
@@ -17,10 +17,9 @@ const TopCompaniesCandle = () => {
     candlestickOptions(false, series)
   );
 
-  console.log("todayStock.value[0-4]", todayStock.value.slice(0, 4));
   const multiSeries = async (sliceValue) => {
     return [
-      { data: await multiCandleData(todayStock.value.slice(0, sliceValue)) },
+      { data: await sortCandleData("multiDaily", todayStock.value, sliceValue) },
     ];
   };
 

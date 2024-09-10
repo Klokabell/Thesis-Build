@@ -1,22 +1,22 @@
 /* eslint-disable no-unused-vars */
 import dayjs from "dayjs";
 import { selectedName, selectedMetric } from "../../DataProvider";
+import { singleCandlePeriod } from "../../DataProvider";
+import { periodSpan } from "../../utilities/dateTools";
 
 const labelFormat = {
   Date: "DD/MMM/YY",
-  Week: "WW",
-  Month: "MMM",
-  Year: "YYYY"
-}
+  week: "W",
+  month: "MMM",
+  year: "YYYY",
+};
 
 const titleMetric = {
-  Daily: "Days",
-  Weekly: "Weeks",
-  Monthly: "Months",
-  Yearly: "Years"
-}
-
-
+  Daily: "Day",
+  Weekly: "Week",
+  Monthly: "Month",
+  Yearly: "Year",
+};
 
 const baseCandleOptions = {
   tooltip: {
@@ -37,6 +37,9 @@ const baseCandleOptions = {
     },
     background: "#4b5563",
     type: "candlestick",
+    animations: {
+      enabled: true,
+    },
   },
   dataLabels: {
     enabled: false,
@@ -61,18 +64,18 @@ const baseCandleOptions = {
       allowMultipleDataPointsSelection: true,
       filter: {
         type: "darken",
-        value: "0.5"
-      }
-    }
-  }
+        value: "0.5",
+      },
+    },
+  },
 };
 
 const multiCompFields = (unit, period) => ({
   title: {
     text: `Top ${unit} Companies`,
     style: {
-      color: "#fafafa"
-    }
+      color: "#fafafa",
+    },
   },
   xaxis: {
     title: "Companies",
@@ -86,42 +89,53 @@ const multiCompFields = (unit, period) => ({
         fontSize: "14px",
         fontFamily: "Arial, sans-serif",
         fontWeight: 500,
+        colors: "#fafafa",
         cssClass: "apexcharts-xaxis-label",
       },
       rotate: -45,
       rotateAlways: true,
       trim: true,
-    }
+    },
   },
 });
 
 const singleCompFields = (unit, period) => ({
   title: {
-    text: `Previous ${unit} ${titleMetric[selectedMetric.value]}`,
+    text: `Previous ${
+      unit > 1 ? unit + " " + titleMetric[period] + "s" : titleMetric[period]
+    }`,
     style: {
-      color: "#fafafa"
-    }
+      color: "#fafafa",
+      fontWeight: 500,
+    },
   },
   xaxis: {
-    title: "Companies",
+    title: {
+      text:
+        titleMetric[period] !== "Day"
+          ? `${titleMetric[period]} Starting:`
+          : "Date",
+      style: {
+        color: "#fafafa",
+        fontSize: "16px",
+        fontWeight: 500,
+      },
+    },
     type: "category",
     labels: {
-      show: unit>=30 ? false : true,
-      
-      formatter: function (val) {
-        return period=="Daily" ? dayjs(val).format(labelFormat[period])
-        : val
-      },
       style: {
-        fontSize: "14px",
-        fontFamily: "Arial, sans-serif",
+        colors: "#fafafa",
+        rotate: -45,
+        trim: true,
+        showDuplicates: true,
+        fontSize: "12px",
         fontWeight: 500,
         cssClass: "apexcharts-xaxis-label",
       },
     },
     tooltip: {
-      enabled: unit>20 ? true : false
-    }
+      enabled: unit > 20 ? true : false,
+    },
   },
 });
 

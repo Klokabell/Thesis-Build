@@ -6,8 +6,9 @@ import UnitDropdown from "../UnitDropdown";
 
 
 
-const TimeFrameComponent = ({ periodSignal, unitSignal }) => {
+const TimeFrameComponent = ({ periodSignal, unitSignal, isLine }) => {
 
+  
   const timeCount = {
     Daily: [5, 10, 30, 90],
     Weekly: [...Array(12).keys()].map((i) => i + 1),
@@ -16,6 +17,8 @@ const TimeFrameComponent = ({ periodSignal, unitSignal }) => {
   };
   
   const [menuArray, setMenuArray] = useState(timeCount["Daily"]);
+
+  
 
   useEffect(() => {
     if (timeCount[periodSignal.value]) {
@@ -27,19 +30,20 @@ const TimeFrameComponent = ({ periodSignal, unitSignal }) => {
 
   const onChangeHandler = (e, signal) => {
     signal.value = e.target.value;
-    console.log(`signal.value: ${signal.value}`)
   };
 
   return (
-    <div className="timeframe-container">
+    <div className="timeframe-container display: flex gap-1">
       <PeriodDropdown
         onChangeHandler={onChangeHandler}
         periodSignal={periodSignal}
+        isLine={isLine}
       />
       <UnitDropdown
         onChangeHandler={onChangeHandler}
         unitSignal={unitSignal}
         menuArray={menuArray}
+        periodSignal={periodSignal}
       />
     </div>
   );

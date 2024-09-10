@@ -1,4 +1,4 @@
-import setWeeklyAvg from "../setWeeklyAverage.js";
+import setWeeklyAvg from "../server/utilities/setWeeklyAverage.js";
 
 const convertToWeekAvg = async (condensedArrays) => {
     
@@ -6,7 +6,6 @@ const convertToWeekAvg = async (condensedArrays) => {
   for (let [key, value] of Object.entries(condensedArrays)) {
     weekObject[key] = setWeeklyAvg(key, value);
   }
-  //console.log("convertToWeekAvg", weekObject)
   return weekObject;
 };
 

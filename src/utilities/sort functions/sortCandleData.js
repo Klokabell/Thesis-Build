@@ -1,4 +1,14 @@
-const multiCandleData = (array) => {
+import { parse, format } from "date-fns";
+// import { periodSpan } from "../dateManager";
+
+const timeObj = {
+  Weekly: "week",
+  Monthly: "month",
+  Yearly: "year",
+};
+
+
+const multiCandleDaily = (array) => {
   const candleArray = array.map((item) => ({
     x: item.Company,
     y: [item.Open, item.High, item.Low, item.Close],
@@ -8,32 +18,52 @@ const multiCandleData = (array) => {
 };
 
 const singleCandleDaily = (array) => {
+
   const candleArray = array.map((item) => ({
-    x: new Date(item.Date),
+    x: format(new Date(item.Date), "d/M/yyyy"),
     y: [item.Open, item.High, item.Low, item.Close],
   }));
 
   return candleArray;
 };
 
-const singleCandleOther = (array, metric) => {
-  console.log("array", array);
-  console.log("metric", metric);
-  const timeObj = {
-    Weekly: "week",
-    Monthly: "month",
-    Yearly: "year",
-  };
+const singleCandleYearly = (array) => {
+  
+  const candleArray = array.map((item) => {
+    return {
+      x: format(new Date(item.year), "yyyy"),
+      y: [item.Open, item.High, item.Low, item.Close]
+    }
+  })
+  return candleArray
+}
 
-
-  const candleArray = array.map((period) => {
-    console.log("period", period)
+const singleCandleOther = (array, period) => {
+  const candleArray = array.map((item) => {    
+    const date = parse(`${item[period]}`, `${period == "week" ? "I" : "M"}`, new Date(item.year, 0, 1))
     return ({
-      x: period[timeObj[metric]],
-      y: [period.Open, period.High, period.Low, period.Close],
+      x: format(date, `${period == "week" ? "eee d yyyy" : "MMM yyyy"}`),
+      y: [item.Open, item.High, item.Low, item.Close],
     })
   });
 
   return candleArray.flat();
 };
-export { multiCandleData, singleCandleDaily, singleCandleOther };
+
+
+const sortCandleData = (chartType, values, period) => {
+  const array = values.reverse()
+  switch (chartType) {
+    case "singleDaily":
+      return singleCandleDaily(array)
+    case "singleOther":
+      return singleCandleOther(array, timeObj[period])
+    case "singleYearly":
+      return singleCandleYearly(array)
+    case "multiDaily": 
+      return multiCandleDaily(array.slice(0, 5))
+    /* case "multiOther": 
+      return  ADD THIS*/
+  }
+}
+export default sortCandleData;

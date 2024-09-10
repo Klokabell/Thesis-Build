@@ -1,46 +1,75 @@
 /* eslint-disable react/prop-types */
-import Chart from "react-apexcharts";
-import { lineOptions } from "../LineOptions";
-import TimeFrameComponent from "../../timeframe/composites/TimeFrameComponent"; 
-import { selectedHistory } from "../../../DataProvider";
-import sortLineDataSingle from "../../../utilities/sort functions/sortLineData";
 import { useState, useEffect } from "react";
-import { useSignal } from "@preact/signals-react";
+import {
+  singleLinePeriod,
+  singleLineUnit,
+  selectedHistory,
+} from "../../../DataProvider";
+import TimeFrameComponent from "../../timeframe/composites/TimeFrameComponent";
+import Chart from "react-apexcharts";
+import sortLineDataSingle from "../../../utilities/sort functions/sortLineDataSingle";
+import { lineOptions } from "../LineOptions";
+import seriesSelector from "../../../utilities/sort functions/seriesSelector";
+import { dateFormatter, periodSpan } from "../../../utilities/dateTools";
 
 const SingleCompanyLine = ({ className }) => {
-  useSignal();
+  const period = singleLinePeriod.value;
+  const unit = singleLineUnit.value;
+  const selected = selectedHistory.value;
 
-  const daysCount = [5, 10, 30, 90];
-
-  const [range, setRange] = useState(daysCount[0]);
-  const [series, setSeries] = useState([]);
-  const [chartOptions, setChartOptions] = useState(lineOptions(true, range));
-
-  const dataWithDates = async (range) => {
-    return await sortLineDataSingle(
-      selectedHistory.value.Daily.slice(0, range)
-    );
+  const convertPeriod = {
+    Daily: "Date",
+    Weekly: "week",
+    Monthly: "month",
+    Yearly: "year",
   };
 
+  const [options, setOptions] = useState(lineOptions(singleLineUnit.value, []));
+  const [series, setSeries] = useState([]);
+
   useEffect(() => {
-    const fetchAndSetSeries = async () => {
-      const slicedSeries = await dataWithDates(range); //retrieve dates and values
-      const datesArray = slicedSeries.shift().Dates; // separate dates object
-      setSeries(slicedSeries);
-      setChartOptions(lineOptions(true, range, datesArray));
+    const asyncHandler = async () => {
+      const baseData = seriesSelector(
+        singleLinePeriod.value,
+        singleLineUnit.value
+      );
+      const sortedLineSeries = await sortLineDataSingle(
+        baseData,
+        convertPeriod[period]
+      );
+      const datesArray = sortedLineSeries[0].Dates.reverse().map((item) => {
+        return period === "Daily"
+          ? dateFormatter(item)
+          : periodSpan(item.year, convertPeriod[period], item.value);
+      });
+
+      const otherDatesArray = datesArray.map((dateObj) => {
+        return [dateObj.startDate, dateObj.endDate];
+      });
+
+      setOptions(
+        lineOptions(
+          unit,
+          period === "Daily" ? datesArray : otherDatesArray,
+          period
+        )
+      );
+      setSeries(sortedLineSeries.slice(1, 5));
     };
-    if (selectedHistory.value.Daily) fetchAndSetSeries();
-    console.log("series", series);
-  }, [selectedHistory.value.Daily, range]);
+    if (selectedHistory.value.Daily) asyncHandler();
+  }, [selected, period, unit]);
 
   return selectedHistory.value?.Daily?.length > 0 ? (
-    <div className={`chart-element_${className}  mt-[10%]`} id="apex">
-      <TimeFrameComponent setValue={setRange} value={range} range={daysCount} />
-      {series.length > 0 ? (
-        <Chart options={chartOptions} series={series} type="line" />
-      ) : (
-        <div>Loading...</div>
-      )}
+    <div
+      className={`chart-element_${className} mt-[5%] mb-[10%] ml-[5%]`}
+      id="apex"
+    >
+      <TimeFrameComponent
+        unitSignal={singleLineUnit}
+        periodSignal={singleLinePeriod}
+        isLine={true}
+      />
+      <Chart options={options} series={series} />
     </div>
   ) : null;
 };

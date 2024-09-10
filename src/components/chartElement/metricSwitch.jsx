@@ -7,15 +7,12 @@ const metricSwitch = (unit) => {
       break;
     case "Week":
       selectedMetric.value = selectedHistory.value.Weekly
-      console.log("selectedMetric.value", selectedMetric.value)
       break;
     case "Month":
       selectedMetric.value = selectedHistory.value.Monthly
-      console.log("selectedMetric.value", selectedMetric.value)
       break;
     case "Year":
       selectedMetric.value = selectedHistory.value.Yearly
-      console.log("selectedMetric.value", selectedMetric.value)
       break;
     default:
   }

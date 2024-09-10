@@ -1,20 +1,28 @@
-const sortLineDataSingle = async (array) => {
-  const getValues = (array, name) => {
-    const lineArray = array.map((stock) => {
-      return stock[name];
-    });
-    return lineArray;
-  };
-  //console.log("sortLine initial Array:", array);
-  const baseDateArray = getValues(array, "Date");
+const sortLineDataSingle = async (array, period) => {
 
+  const getAveragesValues = (array, key) => {
+    return array.map((stock) => {
+      return {
+        value: stock[key],
+        year: stock.year
+      };
+    });
+  };
+  
+  const getValues = (array, key) => {
+    return array.map((stock) => {
+      return stock[key]
+    })
+  }
   const dateArraySet = (array) => {
     return Array.from(new Set(array));
   };
 
-  const lineObjects = [
+  return [
     {
-      Dates: dateArraySet(baseDateArray),
+      Dates: period==="Date" ? 
+      dateArraySet(getValues(array, period)) 
+      : getAveragesValues(array, period),
     },
     {
       name: "Open",
@@ -33,8 +41,6 @@ const sortLineDataSingle = async (array) => {
       data: await getValues(array, "Low"),
     },
   ];
-  console.log("sortLine formatted Array", lineObjects);
-  return lineObjects;
 };
 
 export default sortLineDataSingle;

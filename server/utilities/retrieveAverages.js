@@ -5,6 +5,11 @@ const retrieveAverages = async (collName, field) => {
   const getAverages = await client.db("Stock-Histories").collection(collName)
     .aggregate([
       {
+        $match: {
+          year: { $lte: 2016 }
+        }
+      },
+      {
         $group: {
           _id: { year: "$year", [field]: `$${field}` },
           OpenAvg: { $avg: "$Open" },
@@ -15,10 +20,10 @@ const retrieveAverages = async (collName, field) => {
       },
       {
         $group: {
-          _id: "$_id.year", //to set only year
+          _id: "$_id.year", //set year as id
           Avg: {
             $push: {
-              [field]: "$_id." + field,
+              [field]: "$_id." + field, //set field value
               Open: { $round: ["$OpenAvg", 2] },
               Close: { $round: ["$CloseAvg", 2] },
               High: { $round: ["$HighAvg", 2] },
@@ -32,7 +37,7 @@ const retrieveAverages = async (collName, field) => {
           Avg: {
             $sortArray: {
               input: "$Avg",
-              sortBy: { [field]: 1 }
+              sortBy: { [field]: -1 }
             }
           }
         }
