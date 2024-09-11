@@ -4,13 +4,6 @@ import {
  import restructureResponse from "./sort functions/restructureResponse";
 
 const url = "http://localhost:3005/company";
-let selectedDaily = signal([])
-let selectedWeekly = signal([])
-
-const fetchSelected = async () => {
-  const { Symbol, Date } = selectedStock.value;
-//  console.log("fetchSelected Symbol: ", Symbol)
-
 
 const fetchSelected = async (item) => {
   const { Symbol, Date } = item;
@@ -28,7 +21,6 @@ const fetchSelected = async (item) => {
     const restructuredObj = restructureResponse(periodTypes, responseData)
     selectedHistory.value = { Daily: responseData.Daily, ...restructuredObj}
     console.log("selectedHistory.value", selectedHistory.value)
-
   } catch (err) {
     console.error("fetchSelected Error", err);
   }
