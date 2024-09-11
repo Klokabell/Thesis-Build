@@ -1,14 +1,14 @@
-import { date } from "../../DataProvider";
+import { gameDate } from "../../DataProvider";
 import { compareDates } from "../dateTools";
 import { currentMonthStocks } from "../../DataProvider";
 
 const getTodayStock = () => {
-  const gameDate = date.value;
+  const currentDate = gameDate.value;
   const monthData = currentMonthStocks.value;
 
   const filteredStock = monthData.filter((stock) => {
     const stockDate = stock.Date;
-    return compareDates(gameDate, stockDate);
+    return compareDates(currentDate, stockDate);
   });
 
   const currentStockArray = filteredStock.map((item) => ({

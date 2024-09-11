@@ -72,7 +72,7 @@ const baseCandleOptions = {
 
 const multiCompFields = (unit, period) => ({
   title: {
-    text: `Top ${unit} Companies`,
+    text: `Today's Top ${unit} Companies`,
     style: {
       color: "#fafafa",
     },

@@ -1,13 +1,6 @@
-import {date} from "../../DataProvider";
-import { addDays } from "date-fns";
+// eslint-disable-next-line react/prop-types
+const SetDateButton = ({ addDay }) => {
 
-const SetDateButton = () => {
-  
-  const advanceTime = async () => {
-    date.value = addDays(new Date(date.value), 1);
-    sessionStorage.setItem("date", JSON.stringify(new Date(date.value)));
-  };
-  
 
   return (
     <button
@@ -18,7 +11,7 @@ const SetDateButton = () => {
         hover:border-primary-accent-300 hover:bg-heading-back hover:text-primary-accent-300 
         active:scale-95 
         focus:outline-none"
-      onClick={advanceTime}
+      onClick={addDay}
     >
       Next Day
     </button>

@@ -1,41 +1,46 @@
 import { useSignal } from "@preact/signals-react";
 import { useEffect } from "react";
-import { getDate, getMonth, endOfMonth, subDays } from "date-fns";
+import { getMonth, endOfMonth, addDays } from "date-fns";
 import SetDateButton from "./SetDateButton";
 import DateDisplay from "./DateDisplay";
-import { date } from "../../DataProvider";
-import { compareDates } from "../../utilities/dateTools";
-import updateFetcher from "../../utilities/updateFetcher";
+import { gameDate, todayStock } from "../../DataProvider";
+import getTodayStock from "../../utilities/sort functions/getTodayStock";
+import { isUpdateDay, updatehandler } from "./updateHandler";
 
 const DateManager = () => {
   useSignal();
+  let currentDate = new Date(gameDate.value);
 
-
-  const isUpdateDay = (thisDate, endDate) => {
-    const updateDate = subDays(endDate, 3)
-    const updateToday = compareDates(thisDate, updateDate)
-    return updateToday
+  const addDay = () => {
+    gameDate.value = addDays(currentDate, 1);
+    sessionStorage.setItem("date", JSON.stringify(new Date(gameDate.value)));
+    console.log("gameDate: ", gameDate.value)
   };
 
-
-
   useEffect(() => {
-    const currentDate = new Date(date.value);
-    const monthEnd = endOfMonth(new Date(date.value));
+    let currentDate = new Date(gameDate.value);
+    const currentMonth = getMonth(currentDate) + 1;
+    const monthEnd = endOfMonth(new Date(gameDate.value));
 
-    if (isUpdateDay(currentDate, monthEnd)) {
-      console.log("month ending soon");
-    }
+    const updateStockArray = async () => {
+      todayStock.value = getTodayStock();
 
-    return () => {
-      console.log("effect ending");
+      if (isUpdateDay(currentDate, monthEnd)) {
+        await updatehandler(currentMonth, currentDate);
+      }
+      if (!updateStockArray && todayStock.value.length === 0){
+        addDay()
+      }
     };
-  }, [date.value]);
+    updateStockArray();
+  }, [gameDate.value]);
+
+
 
   return (
     <div>
-      <SetDateButton />
-      <DateDisplay dateValue={date.value} />
+      <SetDateButton addDay={addDay} />
+      <DateDisplay dateValue={gameDate.value} />
     </div>
   );
 };

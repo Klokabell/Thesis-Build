@@ -5,7 +5,7 @@ import Chart from "react-apexcharts";
 import { candlestickOptions } from "../../CandleOptions";
 import TimeFrameComponent from "../../../timeframe/composites/TimeFrameComponent";
 import {
-  date,
+  gameDate,
   selectedHistory,
   singleCandlePeriod,
   singleCandleUnit,
@@ -27,7 +27,7 @@ const SingleCompanyCandle = ({ className }) => {
     return period === "Daily"
       ? sortCandleData(
           "singleDaily",
-          limitSeries(selected.Daily, period, unit, date.value)
+          limitSeries(selected.Daily, period, unit, gameDate.value)
         )
       : period === "Yearly"
       ? sortCandleData(
