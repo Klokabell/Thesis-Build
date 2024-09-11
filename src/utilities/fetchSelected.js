@@ -4,6 +4,12 @@ import {
  import restructureResponse from "./sort functions/restructureResponse";
 
 const url = "http://localhost:3005/company";
+let selectedDaily = signal([])
+let selectedWeekly = signal([])
+
+const fetchSelected = async () => {
+  const { Symbol, Date } = selectedStock.value;
+//  console.log("fetchSelected Symbol: ", Symbol)
 
 
 const fetchSelected = async (item) => {
