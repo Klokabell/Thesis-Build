@@ -18,7 +18,6 @@ const multiCandleDaily = (array) => {
 };
 
 const singleCandleDaily = (array) => {
-
   const candleArray = array.map((item) => ({
     x: format(new Date(item.Date), "d/M/yyyy"),
     y: [item.Open, item.High, item.Low, item.Close],
@@ -62,8 +61,6 @@ const sortCandleData = (chartType, values, period) => {
       return singleCandleYearly(array)
     case "multiDaily": 
       return multiCandleDaily(array.slice(0, 5))
-    /* case "multiOther": 
-      return  ADD THIS*/
   }
 }
-export default sortCandleData;
+export { sortCandleData, singleCandleDaily, singleCandleOther, singleCandleYearly, multiCandleDaily}

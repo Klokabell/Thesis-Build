@@ -20,7 +20,6 @@ const fetchSelected = async (item) => {
     const responseData = await response.json();
     const restructuredObj = restructureResponse(periodTypes, responseData)
     selectedHistory.value = { Daily: responseData.Daily, ...restructuredObj}
-    console.log("selectedHistory.value", selectedHistory.value)
   } catch (err) {
     console.error("fetchSelected Error", err);
   }

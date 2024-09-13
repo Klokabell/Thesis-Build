@@ -10,19 +10,14 @@ import Chart from "react-apexcharts";
 import sortLineDataSingle from "../../../utilities/sort functions/sortLineDataSingle";
 import { lineOptions } from "../LineOptions";
 import seriesSelector from "../../../utilities/sort functions/seriesSelector";
-import { dateFormatter, periodSpan } from "../../../utilities/dateTools";
+import { dateFormatter, periodSpan, convertPeriod } from "../../../utilities/dateTools";
 
 const SingleCompanyLine = ({ className }) => {
   const period = singleLinePeriod.value;
   const unit = singleLineUnit.value;
   const selected = selectedHistory.value;
 
-  const convertPeriod = {
-    Daily: "Date",
-    Weekly: "week",
-    Monthly: "month",
-    Yearly: "year",
-  };
+
 
   const [options, setOptions] = useState(lineOptions(singleLineUnit.value, []));
   const [series, setSeries] = useState([]);

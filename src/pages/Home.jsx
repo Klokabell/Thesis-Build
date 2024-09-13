@@ -1,17 +1,13 @@
 /* eslint-disable no-unused-vars */
+import { selectedHistory } from "../DataProvider";
 import {
   TopGraphContainer,
   HistoryGraphContainer,
 } from "../components/chartContainers";
 import SingleCompanyCandle from "../components/chartElement/candle/specific/SingleCompanyCandle";
 import SingleCompanyLine from "../components/chartElement/line/SingleCompanyLine";
-import Overview from "../components/report boxes/Overview";
-// import Summary from "../components/report boxes/Summary";
-import { useEffect, useContext } from "react";
 import { todayStock, StockState, selectedName } from "../DataProvider";
 import { useSignals } from "@preact/signals-react/runtime";
-import DateDisplay from "../components/date/DateDisplay";
-import SetDateButton from "../components/date/SetDateButton";
 import DateManager from "../components/date/dateManager";
 
 export const Home = () => {
@@ -32,8 +28,8 @@ export const Home = () => {
         <div className="selectedName row-start-2 col-start-3 col-span-3 justify-self-center mt-[15%] pt-4 font-lato font-bold text-5xl text-zinc-100">
           {selectedName.value}
         </div>
-        <SingleCompanyCandle className="singlecandle row-start-3 col-start-1 col-span-3" />
-        <SingleCompanyLine className="singleline row-start-3 col-start-5 col-span-3" />
+        {selectedHistory.value?.Daily?.length > 0 ?<SingleCompanyCandle className="singlecandle row-start-3 col-start-1 col-span-3" /> : <div className="div"></div> }
+        {selectedHistory.value?.Daily?.length > 0 ?<SingleCompanyLine className="singleline row-start-3 col-start-5 col-span-3" /> : <div></div>}
       </div>
     </div>
   );

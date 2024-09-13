@@ -1,5 +1,5 @@
 // import SearchBar from "../composites/SearchBar/SearchBar";
-import SearchBarAuto from "../composites/SearchBarAuto";
+import SearchBarAuto from "./SearchBarAuto";
 import { useSignals } from "@preact/signals-react/runtime";
 import { todayStock } from "../DataProvider";
 

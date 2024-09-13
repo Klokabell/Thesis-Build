@@ -6,7 +6,7 @@ const DateDisplay = ({ dateValue }) => {
 
   return (
     <div className="date-display font-lato font-bold text-lg text-zinc-100">
-      Simulation Date: {displayDate}
+      {displayDate}
     </div>
   );
 };

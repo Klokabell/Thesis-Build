@@ -1,7 +1,7 @@
 import client from "../utilities/mongoConnect.js";
 
 const dbName = "2016";
-const collName = "Stock_Collection";
+const collName = "Stocks";
 
 const retrieveUpdate = async (month) => {
   try {

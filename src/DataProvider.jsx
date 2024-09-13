@@ -13,7 +13,6 @@ export const selectedName = signal("");
 export const todayStock = signal([]);
 export const currentMonthStocks = signal({});
 export const nextMonthStocks = signal(null);
-export const selectedMetric = signal("Daily");
 export const singleCandlePeriod = signal("Daily");
 export const singleCandleUnit = signal(5);
 export const singleLinePeriod = signal("Daily");

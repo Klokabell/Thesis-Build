@@ -21,7 +21,14 @@ import {
   isEqual,
 } from "date-fns";
 
-const dateFormatter = (date) => format(new Date(date), "d/M/yyyy")
+const convertPeriod = {
+  Daily: "Date",
+  Weekly: "week",
+  Monthly: "month",
+  Yearly: "year",
+};
+
+const dateFormatter = (date) => format(new Date(date), "cccc d/M/yyyy")
 
 
 const dateToValuesFormatter = (inputDate) => {
@@ -63,7 +70,7 @@ const findPreviousDate = (dateValue, period, units) => {
 };
 
 
-const limitSeries = (array, period, units, dateValue) => {
+const limitSeriesDaily = (array, period, units, dateValue) => {
   const currentDate = new Date(dateValue);
 
   let prevDate = findPreviousDate(currentDate, period, units);
@@ -145,11 +152,12 @@ export {
   matchDate,
   valuesToDateFormatter,
   findPreviousDate,
-  limitSeries,
+  limitSeriesDaily,
   limitOtherSeries,
   formatDateLabels,
   dateFormatter,
   periodStarts,
   compareDates,
-  periodSpan
+  periodSpan,
+  convertPeriod
 };

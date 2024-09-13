@@ -1,8 +1,5 @@
 /* eslint-disable no-unused-vars */
 import dayjs from "dayjs";
-import { selectedName, selectedMetric } from "../../DataProvider";
-import { singleCandlePeriod } from "../../DataProvider";
-import { periodSpan } from "../../utilities/dateTools";
 
 const labelFormat = {
   Date: "DD/MMM/YY",

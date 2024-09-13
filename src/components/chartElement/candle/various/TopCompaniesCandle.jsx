@@ -3,9 +3,9 @@
 import Chart from "react-apexcharts";
 import { candlestickOptions } from "../../CandleOptions";
 import TimeFrameComponent from "../../../timeframe/composites/TimeFrameComponent";
-import sortCandleData from "../../../../utilities/sort functions/sortCandleData";
+import {sortCandleData} from "../../../../utilities/sort functions/sortCandleData";
 import { useState, useEffect } from "react";
-import { gameDate, selectedMetric, todayStock } from "../../../../DataProvider";
+import { gameDate, todayStock } from "../../../../DataProvider";
 import { computed, useSignal } from "@preact/signals-react";
 
 const TopCompaniesCandle = () => {
