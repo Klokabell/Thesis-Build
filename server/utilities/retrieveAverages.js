@@ -1,14 +1,16 @@
 import client from "./mongoConnect.js";
 
-const retrieveAverages = async (collName, field) => {
+const retrieveAverages = async (collName, field, queryMonth, isCompanyUpdate) => {
   const fieldAverage = "Averages";
+  const updateMatchCondition = isCompanyUpdate ? 
+      { year: 2016, month: queryMonth }
+    : { $or: [
+      { year: 2016, month: { $lte: queryMonth}}, 
+      { year: { $lt: 2016 } }
+    ]}
   const getAverages = await client.db("Stock-Histories").collection(collName)
     .aggregate([
-      {
-        $match: {
-          year: { $lte: 2016 }
-        }
-      },
+      { $match: updateMatchCondition },
       {
         $group: {
           _id: { year: "$year", [field]: `$${field}` },

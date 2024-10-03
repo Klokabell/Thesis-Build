@@ -21,24 +21,7 @@ router.post("/start", async (req, res) => {
   }
 });
 
-router.post("/company", async (req, res) => {
-  const { Symbol, Date } = req.body;
-  try {
-    const data = await retrieveHistory(companiesDB, Symbol, Date);
-    if (data.Daily) {
-      return res.status(200).send(data);
-    } else {
-      return res
-        .status(404)
-        .send({ message: "No data found for the given symbol." });
-    }
-  } catch (error) {
-    console.error("Error retrieving history:", error);
-    return res
-      .status(500)
-      .send({ message: "An error occurred while retrieving the data." });
-  }
-});
+
 
 router.post("/update", async (req, res) => {
   const { month } = req.body;
@@ -60,5 +43,26 @@ router.post("/update", async (req, res) => {
       .send({ message: "An error occurred while retrieving the data." });
   }
 });
+
+router.post("/company", async (req, res) => {
+  const { Symbol, Month, isCompanyUpdate } = req.body;
+  try {
+    const data = await retrieveHistory(companiesDB, Symbol, Month, isCompanyUpdate);
+    if (data.Daily) {
+      return res.status(200).send(data);
+    } else {
+      return res
+        .status(404)
+        .send({ message: "No data found for the given symbol." });
+    }
+  } catch (error) {
+    console.error("Error retrieving history:", error);
+    return res
+      .status(500)
+      .send({ message: "An error occurred while retrieving the data." });
+  }
+});
+
+
 
 export { router };

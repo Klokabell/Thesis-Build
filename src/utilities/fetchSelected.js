@@ -1,25 +1,36 @@
-import { 
+import {
+  currentDateObj,
   selectedHistory,
- } from "../DataProvider";
- import restructureResponse from "./sort functions/restructureResponse";
-
+  selectedFuture,
+} from "../StateManager";
+import restructureResponse from "./sort functions/selected company data/restructureResponse";
+import sortAndSplitSelectedData from "./sort functions/selected company data/sortAndSplitSelectedData";
 const url = "http://localhost:3005/company";
 
-const fetchSelected = async (item) => {
-  const { Symbol, Date } = item;
-  const periodTypes = ["Weekly", "Monthly", "Yearly"]
+const fetchSelected = async (item, isCompanyUpdate) => {
+  const { Symbol, Month } = item;
+  const periodTypes = ["Weekly", "Monthly", "Yearly"];
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ Symbol, Date }),
+      body: JSON.stringify({ Symbol, Month, isCompanyUpdate }),
     });
 
     const responseData = await response.json();
-    const restructuredObj = restructureResponse(periodTypes, responseData)
-    selectedHistory.value = { Daily: responseData.Daily, ...restructuredObj}
+    const restructuredObj = restructureResponse(periodTypes, responseData);
+    const splitStocksObj = sortAndSplitSelectedData(
+      {
+        Daily: responseData.Daily,
+        ...restructuredObj,
+      },
+      currentDateObj.value
+    );
+    console.log("splitStocksObj", splitStocksObj)
+    selectedHistory.value = splitStocksObj.prevDataObject;
+    selectedFuture.value = splitStocksObj.futureDataObject;
   } catch (err) {
     console.error("fetchSelected Error", err);
   }

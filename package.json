@@ -12,7 +12,7 @@
     "compile:sass": "sass style/sass/main.scss style/main.css"
   },
   "dependencies": {
-    "@preact/signals-react": "^2.0.1",
+    "@preact/signals-react": "^2.2.0",
     "apexcharts": "^3.45.2",
     "cors": "^2.8.5",
     "date-fns": "^3.6.0",
@@ -28,6 +28,7 @@
     "react-search-autocomplete": "^8.5.2"
   },
   "devDependencies": {
+    "@preact/signals-react-transform": "^0.4.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",

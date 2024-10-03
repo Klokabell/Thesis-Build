@@ -1,5 +1,5 @@
 import { dateToValuesFormatter } from "./dateTools";
-import { gameDate } from "../DataProvider";
+import { gameDate } from "./createGameDate";
 
 const currentDataFetch = async (url) => {
   const { month } = dateToValuesFormatter(gameDate.value);

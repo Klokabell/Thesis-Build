@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import "./index.css"
-import DataProvider from "./DataProvider";
+import StateManager from "./StateManager";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <DataProvider></DataProvider>
+  <StateManager></StateManager>
 );
