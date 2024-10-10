@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import SelectedChartComponent from "./SelectedChartComponent";
-import TimeFrameContainer from "../timeframe/TimeFrameContainer";
+import TimeFrameContainer from "../../timeframe/TimeFrameContainer";
 import { useState } from "react";
 import { computed } from "@preact/signals-react";
-import { selectedHistory } from "../../StateManager";
-import formatSelectedCandleSeries from "./series/formatSelectedSeriesObject";
-import formatSelectedLineSeries from "./series/formatSelectedLineSeries";
+import { selectedHistory } from "../../../StateManager";
+import formatSelectedCandleSeries from "../series/helpers/candleHelpers/formatSelectedCandleSeries";
+import formatSelectedLineSeries from "../series/helpers/lineHelpers/formatSelectedLineSeries";
 
 const SelectedChartContainer = ({ chartType, className }) => {
   const selectedCandleObject = computed(() =>

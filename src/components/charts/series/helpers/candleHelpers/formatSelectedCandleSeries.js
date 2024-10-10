@@ -1,4 +1,4 @@
-import limitSeriesArrays from "../../../utilities/sort functions/selected company data/limitSeriesArrays";
+import limitSeriesArrays from "../../../../../utilities/sort functions/selected company data/limitSeriesArrays";
 import formatCandleItem from "./formatCandleItem";
 
 const formatSelectedCandleSeries = (historyObject, logDate) => {

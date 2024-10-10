@@ -1,5 +1,5 @@
-import lineOptions from "./lineOptions";
-import candlestickOptions from "./candlestickOptions";
+import lineOptions from "../lineOptions";
+import candlestickOptions from "../candlestickOptions";
 
 const optionsSetter = (type, period, unit) => {
   return type === "candlestick"

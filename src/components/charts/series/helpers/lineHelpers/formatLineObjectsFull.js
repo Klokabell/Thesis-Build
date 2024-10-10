@@ -1,6 +1,7 @@
 const formatLineObjects = (item, period) => {
   if (!item) return null;
   
+  // switch to determine which value uses which key
   let dateKey = "Date";
   switch (period) {
     case "Daily":
@@ -16,6 +17,7 @@ const formatLineObjects = (item, period) => {
       dateKey = "year";
       break;
   }
+
   const baseObject = {
     Open: [],
     High: [],
@@ -24,16 +26,17 @@ const formatLineObjects = (item, period) => {
     Dates: []
   }
 
+  // converts original array of objects into a single object containing the arrays for each field
   const formattedData = item.reduce((newArray, currentArray) => {
     newArray.Open.push(currentArray.Open)
     newArray.High.push(currentArray.High)
     newArray.Low.push(currentArray.Low)
     newArray.Close.push(currentArray.Close)
-    newArray.Dates.push(currentArray[period])
+    newArray.Dates.push(currentArray[dateKey])
     return newArray;
   }, baseObject)
 
-  console.log("formattedData", formattedData, period)
+  // maps through each field to format the values to be readable by the chart component
   const formattedObj = {
     series: [
       {
@@ -71,51 +74,3 @@ const formatLineObjects = (item, period) => {
 };
 
 export default formatLineObjects;
-
-
-
-
-/*
-[
- {
-    name: "Open",
-    data: [item.Open]
- },
- {
-    name: "High",
-    data: [item.high]]
- },
- {
-    name: "Close",
-    data: [item.Close]
- },
- {
-    name: "Low",
-    data: [item.Low]
- },
-]
-
-
-Close:18.53
-Date:"2016-01-13T00:00:00.000Z"
-High:18.93
-Low:18.5
-Open:18.53
-OpenInt:0
-Volume:69620
-Week:null
-day:13
-month:1
-week:2
-year:2016
-_id:"65e1d8db6a66942d774c7857" 
-
-
-Close:6.25
-High:6.42
-Low:5.88
-Open:6.14
-week:3
-year:
-2016
-*/

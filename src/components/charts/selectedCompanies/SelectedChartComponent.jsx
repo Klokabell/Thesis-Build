@@ -2,8 +2,8 @@
 import Chart from "react-apexcharts";
 import { useEffect, useState } from "react";
 import { useSignals } from "@preact/signals-react/runtime";
-import sliceByUnit from "../../utilities/sort functions/selected company data/sliceByUnit";
-import optionsSetter from "./options/optionsSetter";
+import sliceByUnit from "../../../utilities/sort functions/selected company data/sliceByUnit";
+import optionsSetter from "../options/helpers/optionsSetter";
 
 const SelectedChartComponent = ({ chartType, period, unit, chartObject }) => {
   useSignals();

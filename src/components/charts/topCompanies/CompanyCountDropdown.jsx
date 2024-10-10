@@ -1,3 +1,4 @@
+// eslint-disable-next-line react/prop-types
 const CompanyCountDropdown = ({ companyCount, setCompanyCount }) => {
   const onChangeHandler = (e) => {
     setCompanyCount(e.target.value);

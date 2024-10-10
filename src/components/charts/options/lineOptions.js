@@ -1,7 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { format } from "date-fns";
-import dailyLabelFormatter from "./dailyLabelFormatter";
-import lineLabelFormatters from "./lineLabelFormatters";
+import lineLabelFormatters from "./helpers/lineLabelFormatters";
 
 const lineOptions = (unit, period) => {
   const titleMetric = {
@@ -62,7 +59,7 @@ const lineOptions = (unit, period) => {
             : null,
         style: {
           colors: "#fafafa",
-          fontSize:"10px"
+          fontSize: "10px",
         },
         rotate: -45,
         rotateAlways: true,

@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { selectedHistory } from "../StateManager";
-import TopCompaniesContainer from "../components/chartElement/TopCompaniesContainer";
+import TopCompaniesContainer from "../components/charts/topCompanies/TopCompaniesContainer";
 import { todayStock, selectedItem } from "../StateManager";
-import { useSignals } from "@preact/signals-react/runtime";
 import DateController from "../components/date/DateController";
-import SelectedChartContainer from "../components/chartElement/SelectedChartContainer";
+import SelectedChartContainer from "../components/charts/selectedCompanies/SelectedChartContainer";
 
 export const Home = () => {
-  if (!todayStock.value.length === 0) {
-    return <div>Loading...</div>;
-  }
+
+  const hasSelected = selectedHistory.value?.Daily && selectedHistory.value.Daily.length > 0
+  const hasToday = todayStock.value && todayStock.value.length > 0
+
 
   return (
     <div className="home-component w-full">
@@ -21,20 +21,22 @@ export const Home = () => {
         <div className="selectedName row-start-2 col-start-3 col-span-3 justify-self-center mt-[15%] pt-4 font-lato font-bold text-5xl text-zinc-100">
           {selectedItem.value.Company}
         </div>
-        <TopCompaniesContainer className="topgraph col-start-2 col-span-5 justify-items-center mb-10" />
-        {selectedHistory.value?.Daily?.length > 0 ? (
-          <SelectedChartContainer
-            chartType={"candlestick"}
-            className="singlecandle row-start-3 col-start-1 col-span-3"
-          />
+        {hasToday ? (
+          <TopCompaniesContainer className="topgraph col-start-2 col-span-5 justify-items-center mb-10" />
         ) : (
-          <div className="empty"></div>
+          <div className="loading">Loading Chart</div>
         )}
-        {selectedHistory.value?.Daily?.length > 0 ? (
-          <SelectedChartContainer
-            chartType={"line"}
-            className="singleline row-start-3 col-start-5 col-span-3"
-          />
+        {hasSelected ? (
+          <>
+            <SelectedChartContainer
+              chartType={"candlestick"}
+              className="singlecandle row-start-3 col-start-1 col-span-3"
+            />
+            <SelectedChartContainer
+              chartType={"line"}
+              className="singleline row-start-3 col-start-5 col-span-3"
+            />
+          </>
         ) : (
           <div className="empty"></div>
         )}

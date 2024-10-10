@@ -17,4 +17,4 @@ const generalUpdateHandler = async (currentMonth, date) => {
   );
 };
 
-export default generalUpdateHandler
+export default generalUpdateHandler;

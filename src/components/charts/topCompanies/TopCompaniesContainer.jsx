@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import { todayStock } from "../../StateManager";
-import { gameDate } from "../../utilities/createGameDate";
+import { todayStock } from "../../../StateManager";
+import { gameDate } from "../../../utilities/createGameDate";
 import { useEffect, useState } from "react";
-import getTodayStock from "../../utilities/sort functions/getTodayStock";
+import getTodayStock from "../../../utilities/sort functions/getTodayStock";
 import TopCompaniesCandle from "./TopCompaniesCandle";
 import CompanyCountDropdown from "./CompanyCountDropdown";
-import topCompanyCandleOptions from "./options/topCompaniesCandleOptions";
+import topCompanyCandleOptions from "../options/topCompaniesCandleOptions";
 import { useComputed, useSignalEffect } from "@preact/signals-react";
 
 const TopCompaniesContainer = ({ className }) => {
@@ -13,7 +13,7 @@ const TopCompaniesContainer = ({ className }) => {
     todayStock.value.sort((a, b) => b.Close - a.Close)
   );
   const [companyCount, setCompanyCount] = useState(5);
-  const [series, setSeries] = useState(displayStock.value.slice(0, 5));
+  const [series, setSeries] = useState([]);
   const options = topCompanyCandleOptions(companyCount, gameDate);
   const candleFormatter = (item) => {
     return {
