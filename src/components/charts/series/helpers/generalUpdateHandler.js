@@ -1,6 +1,9 @@
 import generalMonthlyUpdateFetcher from "../../../../utilities/generalMonthlyUpdateFetcher";
 import getTodayStock from "../../../../utilities/sort functions/getTodayStock";
-import { todayStock, currentMonthStocks } from "../../../../StateManager";
+import {
+  todayStock,
+  currentMonthStocks,
+} from "../../../../utilities/signalManager";
 import mergeGeneralUpdate from "../../../../utilities/mergeGeneralUpdate";
 
 const generalUpdateHandler = async (currentMonth, date) => {

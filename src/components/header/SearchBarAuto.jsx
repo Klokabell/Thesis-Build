@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { selectedItem, currentDateObj } from "../../StateManager";
+import { selectedItem, currentDateObj } from "../../utilities/signalManager";
 import { useSignals } from "@preact/signals-react/runtime";
 import { effect } from "@preact/signals-react";
-import { todayStock } from "../../StateManager";
+import { todayStock } from "../../utilities/signalManager";
 import { fetchSelected } from "../../utilities/fetchSelected";
 
 function SearchBarAuto() {

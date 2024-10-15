@@ -5,7 +5,7 @@ import {
   selectedFuture,
   selectedHistory,
   todayStock,
-} from "../../StateManager";
+} from "../../utilities/signalManager";
 import transferItems from "../charts/series/helpers/transferItems";
 
 const updateManager = async (dateObject) => {

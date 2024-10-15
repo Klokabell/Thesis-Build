@@ -1,15 +1,14 @@
 /* eslint-disable no-unused-vars */
-import { selectedHistory } from "../StateManager";
+import { selectedHistory } from "../utilities/signalManager";
 import TopCompaniesContainer from "../components/charts/topCompanies/TopCompaniesContainer";
-import { todayStock, selectedItem } from "../StateManager";
+import { todayStock, selectedItem } from "../utilities/signalManager";
 import DateController from "../components/date/DateController";
 import SelectedChartContainer from "../components/charts/selectedCompanies/SelectedChartContainer";
 
 export const Home = () => {
-
-  const hasSelected = selectedHistory.value?.Daily && selectedHistory.value.Daily.length > 0
-  const hasToday = todayStock.value && todayStock.value.length > 0
-
+  const hasSelected =
+    selectedHistory.value?.Daily && selectedHistory.value.Daily.length > 0;
+  const hasToday = todayStock.value && todayStock.value.length > 0;
 
   return (
     <div className="home-component w-full">

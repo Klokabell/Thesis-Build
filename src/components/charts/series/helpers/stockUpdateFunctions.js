@@ -1,5 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { selectedFuture, selectedItem } from "../../../../StateManager";
+import {
+  selectedFuture,
+  selectedItem,
+} from "../../../../utilities/signalManager";
 import { gameDate } from "../../../../utilities/createGameDate";
 import { isUpdateDay } from "../../../../utilities/dateTools";
 import mergeSelectedFuture from "../../../../utilities/mergeSelectedUpdate";

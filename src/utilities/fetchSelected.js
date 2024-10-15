@@ -2,7 +2,7 @@ import {
   currentDateObj,
   selectedHistory,
   selectedFuture,
-} from "../StateManager";
+} from "./signalManager";
 import restructureResponse from "./sort functions/selected company data/restructureResponse";
 import sortAndSplitSelectedData from "./sort functions/selected company data/sortAndSplitSelectedData";
 const url = "http://localhost:3005/company";
@@ -28,7 +28,7 @@ const fetchSelected = async (item, isCompanyUpdate) => {
       },
       currentDateObj.value
     );
-    console.log("splitStocksObj", splitStocksObj)
+    console.log("splitStocksObj", splitStocksObj);
     selectedHistory.value = splitStocksObj.prevDataObject;
     selectedFuture.value = splitStocksObj.futureDataObject;
   } catch (err) {

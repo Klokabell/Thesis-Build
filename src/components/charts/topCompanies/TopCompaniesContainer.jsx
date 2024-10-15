@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { todayStock } from "../../../StateManager";
+import { todayStock } from "../../../utilities/signalManager";
 import { gameDate } from "../../../utilities/createGameDate";
 import { useEffect, useState } from "react";
 import getTodayStock from "../../../utilities/sort functions/getTodayStock";

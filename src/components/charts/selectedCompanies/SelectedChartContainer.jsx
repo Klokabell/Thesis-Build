@@ -3,7 +3,7 @@ import SelectedChartComponent from "./SelectedChartComponent";
 import TimeFrameContainer from "../../timeframe/TimeFrameContainer";
 import { useState } from "react";
 import { computed } from "@preact/signals-react";
-import { selectedHistory } from "../../../StateManager";
+import { selectedHistory } from "../../../utilities/signalManager";
 import formatSelectedCandleSeries from "../series/helpers/candleHelpers/formatSelectedCandleSeries";
 import formatSelectedLineSeries from "../series/helpers/lineHelpers/formatSelectedLineSeries";
 

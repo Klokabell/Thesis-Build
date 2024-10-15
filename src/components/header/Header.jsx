@@ -1,7 +1,7 @@
 // import SearchBar from "../composites/SearchBar/SearchBar";
 import SearchBarAuto from "./SearchBarAuto";
 import { useSignals } from "@preact/signals-react/runtime";
-import { todayStock } from "../../StateManager";
+import { todayStock } from "../../utilities/signalManager";
 
 const Header = () => {
   useSignals();

@@ -1,10 +1,9 @@
 import { gameDate } from "../createGameDate";
 import { compareDates } from "../dateTools";
-import { currentMonthStocks } from "../../StateManager";
+import { currentMonthStocks } from "../signalManager";
 import { signal } from "@preact/signals-react";
 
 export const todayStock = signal([]); // Initialize as an empty array
-
 
 const getTodayStock = () => {
   const currentDate = gameDate.value;
